@@ -1,0 +1,156 @@
+@charset "UTF-8";
+/**
+** FICHIER DE STYLE DU SITE DE OHMYFOOD
+** @AUTEUR Jérémy ANGELE
+*/
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Shrikhand:wght@300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800;900&display=swap");
+body {
+  width: auto;
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+.container {
+  max-width: 1330px;
+  padding: 0 1rem;
+  margin: 0 auto;
+}
+
+.header-navigation-item a {
+  color: #901C1C;
+}
+.header-photographesTitle {
+  color: #901C1C;
+  font-weight: 400;
+  font-family: DM Sans;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* VARIABLE RESPONSIVE*/
+/*MOBILE*/
+/*TABLETTE*/
+/*DESKTOP ET PLUS*/
+@media only screen and (max-width: 767px) {
+  .header {
+    margin-top: 2em;
+    width: 100%;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .header-svg {
+    order: 1;
+  }
+  .header-svg svg {
+    width: 150px;
+  }
+  .header-navigation {
+    order: 3;
+  }
+  .header-navigation ul {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    justify-content: center;
+  }
+  .header-navigation-item {
+    padding: 0.2rem 0.5rem;
+    margin: 0.2rem 0.2rem;
+    border: 0.5px solid #C4C4C4;
+    box-sizing: border-box;
+    border-radius: 11px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .header-photographesTitle {
+    order: 2;
+    font-size: 14px;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 1100px) {
+  /* SECTION FONCTIONEMMENT */
+  .operation .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .operation__step {
+    width: 30%;
+  }
+  .operation__step .legende {
+    font-size: 14px;
+  }
+
+  /* SECTION RESTAURANT */
+  .restaurants .cards .card {
+    margin: 0 0 1.5rem 0;
+  }
+  .restaurants .cards .card__img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+
+  /* SECTION MENU */
+  .menu {
+    margin-top: -10rem;
+  }
+}
+@media only screen and (min-width: 1101px) {
+  .container {
+    padding: 0 2rem;
+  }
+
+  .operation .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .operation__step {
+    width: 32%;
+  }
+  .operation__step .legende {
+    font-size: 14px;
+  }
+
+  .restaurants .cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .restaurants .cards .card {
+    width: 49%;
+  }
+  .restaurants .cards .card__img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+
+  .menu .allmenu {
+    display: flex;
+    justify-content: space-between;
+  }
+  .menu .allmenu .listmenu {
+    width: 32%;
+  }
+
+  .featured_image {
+    height: 300px;
+    object-fit: cover;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */

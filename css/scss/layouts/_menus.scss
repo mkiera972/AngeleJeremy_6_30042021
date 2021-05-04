@@ -1,0 +1,189 @@
+/* MENU */
+.featured_image{
+    width: 100%;
+}
+
+.menu{
+    margin-top: -4rem;
+    border-radius: 2rem 2rem 0 0;
+    background-color: $color_light_grey;
+    position: relative;
+
+    &__header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 0 1rem 0;
+    }
+
+    &__title{
+        font-family: "Shrikhand", sans-serif;
+        font-size: 25px;
+    }
+
+    &__icon{
+        position: relative;
+        height: 2rem;
+        width: 2.5rem;
+        padding: 0;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        cursor: pointer;
+        background-color: $color_black;
+        
+        &:hover::before {
+            opacity: 1;
+        }
+          
+        &::before {
+            opacity: 0;
+            transition: 0.5s;
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background:linear-gradient(0deg, $color-primary 0%,$color-secondary 100%);
+        }
+
+        .doicon{
+            transition-duration: .25s;
+            background-color: $color_light_grey;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            mix-blend-mode: lighten;
+        }
+
+        .doicon--default{
+            opacity: 1;
+        }
+
+        
+    }
+
+    &__icon:hover {
+        .doicon {
+          &--default {
+            opacity: 0;
+          }
+        }
+    }
+}
+
+/* LISTE DES MENUS */
+.listmenu{
+    &__title{
+        font-weight: 300;
+        font-size: 1em;
+        margin-top : 0;
+        padding: 0 0 0.5rem 0;
+        position: relative;
+        &:after {
+            content: "";
+            width: 2.5rem;
+            height: 0.25rem;
+            background-color: $color_blue_sky;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+    }
+
+    &__item{
+        background-color: $color_white;
+        padding: 1rem;
+        display: flex;
+        border-radius: .75rem;
+        margin: 1rem 0;
+        box-shadow: 0.25rem 0.25rem 1rem rgb(0 0 0 / 10%);
+        overflow: hidden;
+        cursor: pointer;
+        animation: listMenuAppear 1s;
+        animation-timing-function: cubic-bezier(0,.3,0.7,1);
+        animation-fill-mode: both;
+        &:hover {
+            .listmenu__validator{
+                margin-right: -1rem;
+            } 
+            i{
+                transform: rotate(0);
+            }
+        }
+    }
+
+    
+
+    &__content{
+        overflow: hidden;
+        flex: 1;
+    }
+
+    &__subtitle,&__description{
+        margin: 0;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    &__price{
+        font-weight: 700;
+        display: flex;
+        align-items: flex-end;
+    }
+
+    &__validator{
+        background-color: $color_validator;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition-duration: .5s;
+        margin: -1rem -6rem -1rem 1rem;
+        width: 70px;
+    }
+
+    i{
+        height: 1.6rem;
+        width: 1.6rem;
+        background-color: $color_white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 100px;
+        transform: rotate(
+            -360deg
+            );
+        color: $color_validator;
+        transition-duration: 0.7s;      
+    }
+
+}
+
+.listmenu__item:hover .listmenu__validator i{
+    transform: rotate(0);
+}
+
+/* DIV BUTTON COMMANDER */
+.command{
+    display: flex;
+    text-decoration: none;
+    justify-content: center;
+    padding: 1rem 0 3rem 0;
+}
+
+/* APPARITIONS MENU */
+@for $i from 0 to 9 {
+    .wait-#{$i} {
+      animation-delay:  #{$i/10}s;
+    }
+}
+
+
+

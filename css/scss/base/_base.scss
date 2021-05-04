@@ -1,0 +1,45 @@
+/**
+** FICHIER DE STYLE DU SITE DE OHMYFOOD
+** @AUTEUR Jérémy ANGELE
+*/
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Shrikhand:wght@300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800;900&display=swap");
+
+body{
+    width: auto;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+.container{
+    max-width: 1330px;
+    padding: 0 1rem;
+    margin: 0 auto;
+}
+
+.header{
+    &-navigation{
+        &-item{
+            a{
+                color: $color_primary_one;
+            }
+            
+        }
+    }
+
+    &-photographesTitle{
+        color: $color_primary_one;
+        font-weight: 400;
+        font-family: DM Sans;
+    }
+}
+
+a{
+    text-decoration: none;
+}
+
+
+
