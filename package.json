@@ -1,0 +1,20 @@
+{
+  "name": "fisheye",
+  "version": "1.0.0",
+  "description": "un site web qui permet aux photographes indépendants de présenter leurs meilleurs travaux",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --watch ./css/scss/main.scss:./css/style.css",
+    "prefix": "postcss ./css/style.css --use autoprefixer -d ./css/prefixed/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mkiera972/AngeleJeremy_6_30042021.git"
+  },
+  "author": "jeremy angele",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mkiera972/AngeleJeremy_6_30042021/issues"
+  },
+  "homepage": "https://github.com/mkiera972/AngeleJeremy_6_30042021#readme"
+}

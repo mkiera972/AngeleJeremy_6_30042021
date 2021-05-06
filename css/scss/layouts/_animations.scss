@@ -1,0 +1,88 @@
+/* CSS SPINNER CHARGEMENT DE LA PAGE */
+.loader{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    background-color: hsla(0,0%,100%,.9);
+    animation: background_spinner .01s;
+    animation-delay: 2s;
+    animation-fill-mode: both;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &__spinner{
+        animation:spin 3s linear;
+        border:solid 2vmin transparent;
+        border-radius:50%;
+        border-right-color:$color_primary;
+        border-top-color:$color_primary;
+        box-sizing:border-box;
+        height:20vmin;
+        left:calc(50% - 10vmin);
+        position:fixed;
+        top:calc(50% - 10vmin);
+        width:20vmin;
+        z-index:1;
+        &:before {
+          animation:spin 4s linear;
+          border:solid 2vmin transparent;
+          border-radius:50%;
+          border-right-color:$color_secondary;
+          border-top-color:$color_secondary;
+          box-sizing:border-box;
+          content:"";
+          height:16vmin;
+          left:0;
+          position:absolute;
+          top:0;
+          width:16vmin;
+        }
+        &:after {
+          animation:spin 5s linear;
+          border:solid 2vmin transparent;
+          border-radius:50%;
+          border-right-color:$color_tertiary;
+          border-top-color:$color_tertiary;
+          box-sizing:border-box;
+          content:"";
+          height:12vmin;
+          left:2vmin;
+          position:absolute;
+          top:2vmin;
+          width:12vmin;
+        
+        }
+    }
+}
+
+
+@keyframes background_spinner {
+    100% {
+        opacity: 0;
+        z-index: -10;
+    }
+}
+
+@keyframes spin {
+    100% {
+        transform:rotate(360deg);
+    }
+}
+
+
+/*  KEYFRAMES APPARATION MENU */
+@keyframes listMenuAppear {
+    0% {
+        transform: scale(0);
+        opacity: .1;
+    }
+    85%,100% {
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+    }
+}
