@@ -149,7 +149,7 @@ a {
     margin: 1rem 0;
   }
   .articles .photographe-img {
-    height: 150px;
+    height: 180px;
   }
 }
 @media only screen and (min-width: 768px) and (max-width: 1100px) {
@@ -181,7 +181,7 @@ a {
   }
   .articles .photographe-img {
     width: 40%;
-    height: 150px;
+    height: 180px;
   }
 }
 @media only screen and (min-width: 1101px) {
@@ -200,7 +200,7 @@ a {
   }
   .articles .photographe-img {
     width: 50%;
-    height: 150px;
+    height: 180px;
   }
 }
 
