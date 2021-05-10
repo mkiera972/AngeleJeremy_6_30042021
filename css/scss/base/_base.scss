@@ -20,11 +20,29 @@ body{
     margin: 0 auto;
 }
 
+
+.linkToMain{
+    margin: 0.5rem auto;
+    background-color: $color_background_btn_one;
+    color: $color_black;
+    border-radius: 5px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 23px;
+    text-align: center;
+    border : solid 1px $color_background_btn_one;
+    display: none;
+    width: 180px;
+    padding: 0.2rem;
+    
+}
+
 /** 
 HEADER
 */
 .header{
-    margin-top: 2em;
+    margin-top: 1em;
     width: 100%;
     display: flex;
     justify-content: space-between;
