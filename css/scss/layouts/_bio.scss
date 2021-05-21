@@ -1,0 +1,453 @@
+
+/** 
+BIOGRAPHIE
+*/
+.bio{
+    width: 100%;
+    display: flex;
+    &-portrait{
+        display: block;
+        text-align: center;
+    }
+
+    &-img{
+        width: 50%;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    &-name{
+        color: $color_primary_two;
+        font-weight: 400;
+        margin: 0.5rem 0;
+    }
+
+    &-description{
+        text-align: center;
+        margin-bottom: -20px;
+    }
+
+    &-location{
+        color: $color_primary_two;
+        font-weight: 400;
+        font-size: 13px;
+        margin: 0.5rem 0;
+    }
+
+    &-slogan{
+        font-size: 10px;
+        margin: 0.5rem 0;
+    }
+
+    &-price{
+        font-size: 9px;
+        margin: 0.5rem 0;
+        color : $color_secondary_two;
+    }
+
+    &-tags{
+        ul{
+            width: 100%;
+            display: flex;
+            list-style: none;
+            padding: 0 ;
+        }
+
+        &-item{
+            padding: 0.2rem .5rem;
+            margin: .2rem .2rem;
+            border: 0.5px solid #C4C4C4;
+            box-sizing: border-box;
+            border-radius: 11px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 500;
+
+            a{
+                color: $color_primary_one;
+            }
+        }
+        
+    }
+}
+
+
+
+
+.filter{
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  &-label{
+    font-size: 18px;
+    width: 8%;
+    font-weight: bold;
+    line-height: 23px;
+  }
+
+  &-dropbtn {
+    background-color: $color_primary_one;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    
+  }
+
+  &-dropdown {
+    position: relative;
+    display: inline-block;
+    
+    &-content {
+      display: none;
+      position: absolute;
+      background-color: $color_primary_one;
+      min-width: 125px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+  
+      a {
+        position: relative;
+        &:before {
+          content : "";
+          position: absolute;
+          left: 10%;
+          top  : 0;
+          height  : 1px;
+          width   : 80%;
+          border-top:1px solid $color_white;
+        }
+        color: $color_white;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        &:hover {background-color: $color_primary_two}
+      }    
+
+    }
+  
+    &:hover{
+      background-color: $color_primary_two;
+      svg {    
+        animation: rotation .5s linear;
+        animation-fill-mode: both;
+      }
+    }
+  }
+}
+
+
+
+@keyframes rotation {
+  100% {
+    transform: rotate(180deg);
+  }
+}
+
+.btn{
+  padding: .2rem 1rem ;
+  font-weight: 700;
+  display: inline-block;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  line-height: 1.42857143;
+  border-radius: 4px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border-radius: 5px;
+  &.default{
+    background-color: $color_primary_one;
+    border: 1px solid $color_primary_one;
+    color: $color_white;
+  }
+}
+
+
+.portfolio{
+    &-content{
+        margin-bottom: 20px;
+    }
+
+    &-img{
+        width: 100%;
+        border-radius: 2%;
+        object-fit: cover;
+        height: 400px;
+    }
+
+    &-description{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: $color_primary_one;  
+        position: relative;   
+    }
+
+    &-like{
+      position: absolute;
+      right: 20px;
+    }
+
+    &-imgTitle{
+        margin: 0;
+        color: $color_primary_one;
+    }
+
+    i{
+      &:hover{
+        cursor: pointer;
+      }
+    }
+}
+
+
+/* The ligthbox (background) */
+.ligthbox {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 40%;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: $background_color_lightbox;
+  }
+  
+  /* Modal Content */
+  .ligthbox-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    width: 100%;
+    max-width: 1330px;
+    &-imgTitle{
+        color: $color_primary_one;
+        
+        margin: 0 2.5rem;    
+    }
+  }
+  
+  /* The Close Button */
+  .closeLigthbox {
+    color: $color_primary_one;
+    position: absolute;
+    top: -10px;
+    right: 13px;
+    font-size: 35px;
+    font-weight: bold;
+  }
+  
+  .closeLigthbox:hover,
+  .closeLigthbox:focus {
+    color: $color_black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .slides {
+    display: none;
+    text-align: center;
+    width: 80%;
+    margin: auto;
+    &-img{
+        width: 100%;
+        height: 350px;
+        object-fit: cover;       
+    }
+  }
+  
+  .cursor {
+    cursor: pointer;
+  }
+  
+  /* Next & previous buttons */
+  .prev,
+  .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -50px;
+    color: $color_primary_one;
+    font-weight: bold;
+    font-size: 20px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  
+  /* Position the "next button" to the right */
+  .next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+  }
+
+
+/**** test **/
+.modal-btn {
+    font-size: 145%;
+    background: #fe142f;
+    display: flex;
+    margin: auto;
+    padding: 2em;
+    color: #fff;
+    padding: 0.75rem 2.5rem;
+    border-radius: 1rem;
+    cursor: pointer;
+  }
+  
+  .modal-btn:hover {
+    background: #3876ac;
+  }
+  
+  .footer {
+    margin: 20px;
+    padding: 10px;
+    font-family: var(--font-slab);
+  }
+  
+  /* Modal form */
+  .bgroundModal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: rgba(26, 39, 156, 0.4);
+  }
+  
+  .content {
+    margin: 5% auto;
+    width: 100%;
+    max-width: 500px;
+    animation-name: modalopen;
+    animation-duration: var(--modal-duration);
+    background: $color_background_modal;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    color: $color_label_modal;
+    padding-top: 10px;
+  }
+  
+  .headerModal{
+    display: flex;
+    padding: 2% 4%;
+    &-titleFormModal{
+        font-weight: 400;
+        font-size: 2rem;
+        margin: 0;
+    }
+
+    .closeModal {
+        width: 50px;
+        height: 50px;
+        opacity: 1;
+        cursor: pointer;
+        transform: scale(0.7);
+    }
+    .closeModal:before,
+    .closeModal:after {
+        position: absolute;
+        left: 15px;
+        content: " ";
+        height: 33px;
+        width: 3px;
+        background-color: #fff;
+    }
+    .closeModal:before {
+        transform: rotate(45deg);
+    }
+    .closeModal:after {
+        transform: rotate(-45deg);
+    }
+  }
+
+  .modal-body {
+    padding: 15px 4%;
+    margin: 15px auto;
+  }
+  
+  label {
+    font-size: 24px;
+    font-weight: normal;
+    display: inline-block;
+    margin-bottom: 11px;
+  }
+
+  input, textarea {
+    padding: 8px;
+    border: 0.8px solid #ccc;
+    outline: none;
+  }
+  
+  
+  .text-control {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 20px;
+    height: 48px;
+  }
+
+  .textarea-control {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    border-radius: 8px;
+  }
+
+  .formSubmit{
+    width: 100%;
+    text-align: center;
+  }
+
+  /* custom select end */
+  .text-label {
+    font-weight: normal;
+    font-size: 16px;
+  }
+ 
+  
+  @media screen and (max-width: 768px) {
+    .content {
+      margin: 0;
+    }
+  }
+  
+  
+  @media only screen and (min-width: 769px) and (max-width: 800px) {
+    .content {
+      margin: 8% auto;
+    }
+  }
+  
+  @keyframes modalopen {
+    from {
+      opacity: 0;
+      transform: translateY(-150px);
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  
+  
