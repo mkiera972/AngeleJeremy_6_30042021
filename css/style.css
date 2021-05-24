@@ -21,7 +21,6 @@ body {
 
 .main {
   margin: 1rem 0;
-  position: relative;
 }
 
 a {
@@ -599,6 +598,10 @@ HEADER
     display: none;
   }
 
+  .popular {
+    display: none;
+  }
+
   /**
   PAGE D'ACCUEIL
   */
@@ -616,6 +619,14 @@ HEADER
 
   .portfolio-img {
     height: 700px;
+  }
+
+  .filter {
+    display: none;
+  }
+
+  .popular {
+    display: none;
   }
 }
 @media only screen and (min-width: 1101px) {

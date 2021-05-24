@@ -7,6 +7,7 @@
         <link rel="icon" href="images/favicon/favicon.ico" />
         <link rel="stylesheet" href="css/style.css" />
         <link rel="stylesheet" href="css/fontawesome.min.css"/>
+        <link rel="stylesheet" href="https://cdn.plyr.io/3.6.8/plyr.css" />
     </head>
 <body>
 <!-- EN-TETE -->
@@ -25,16 +26,7 @@
         </a>
     </header>
     <div class="bio" role="biographie">
-        <!--div class="bio-description">
-            <div class="bio-tags" role="tags" aria-label="Étiquette du photographe">
-                <ul><li class="bio-tags-item"><a href="#">#portrait</a></li>
-                    <li class="bio-tags-item"><a href="#">#events</a></li>
-                    <li class="bio-tags-item"><a href="#">#travel</a></li>
-                    <li class="bio-tags-item"><a href="#">#animals</a></li>
-                </ul>
-            </div> 
-        </div-->
-        <!--img class="bio-img" alt="Mimi keel" src="./images/photographes/Photographers_Photos/MimiKeel.jpg"/-->      
+<!-- BIO DU PHOTOGRAPHE --> 
     </div>
 </div>
 <!-- CONTENU PRINCIPALE -->
@@ -48,14 +40,14 @@
         <div class="filter">
             <label class="filter-label">Tier par </label>
             <div class="filter-dropdown">
-                <button class="filter-dropbtn" aria-haspopup="true" aria-expanded="false">Popularité
+                <button class="filter-dropbtn" onclick="classTriByAttribut.triByPopular()" aria-haspopup="true" aria-expanded="false">Popularité
                     <svg role="icon" alt="Afficher le menu de tri" width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1 1.33447L8.00465 8.13311L14.5973 1.33447" stroke="#E9E9E9" stroke-width="2"/>
                     </svg>                  
                 </button>
                 <div class="filter-dropdown-content">
-                    <a href="#">Date</a>
-                    <a href="#">Titre</a>
+                    <a href="javascript:void(0);" onclick="classTriByAttribut.triByDate()">Date</a>
+                    <a href="javascript:void(0);" onclick="classTriByAttribut.triByTitle()">Titre</a>
                 </div>
             </div>
         </div>
@@ -145,5 +137,6 @@
     </div>
 </main>
 <script src="js/bio.js"></script>
+<script src="https://cdn.plyr.io/3.6.8/plyr.js"></script>
 </body>
 </html>

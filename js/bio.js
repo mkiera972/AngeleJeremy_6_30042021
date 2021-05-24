@@ -1,13 +1,20 @@
-/**
+
+/******************************************
  * RECUPERATION DE L'ID DU PHOTOGRAPHE
-*/
+ ******************************************/
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const IDPhotographe = urlParams.get('ID');
 
+/******************************************
+ * INITIALISATION DU TOTAL DE LIKES
+ ******************************************/
 var allLikes = 297081;
 
-//TABLEAU CONTENANT LES DONNEES DU PHOTOGRAPHE EN COURS
+
+/**************************************************************
+ * TABLEAU GLOBAL CONTENANT LES DONNEES DU PHOTOGRAPHE EN COURS
+ **************************************************************/
 var dataPhotographe = new Array();
 
 
@@ -70,28 +77,7 @@ var dataPhotographe = new Array();
     imgPortrait.setAttribute("alt", "Portrait du photographe " + aa_photographe[0].profil[0].name);
     bio.appendChild(imgPortrait);
 
-    //AJOUT DU PORTFOLIO
-    const portFolio = document.querySelector(".portfolio");
-    
-    //DOM LIGTHBOX
-    const ligthBoxContent = document.querySelector(".ligthbox-content");
-    
-    //BOUCLE SUR LES MEDIAS
-    aa_photographe[1].media.forEach((media,index) =>{
-
-      let typeMedia = media.image ? true : false;
-
-      const newMedia = this.f_js_gen_portfolio(media,index,typeMedia);
-      portFolio.appendChild(newMedia);
-
-      const newMediaLigthBox = this.f_js_gen_mediaLigthBox(media,typeMedia);
-      ligthBoxContent.appendChild(newMediaLigthBox);
-    });
-
-    const caption = document.createElement("p");
-    caption.setAttribute("id", "caption");
-    caption.classList.add("ligthbox-content-imgTitle");
-    ligthBoxContent.appendChild(caption);   
+    this.f_js_create_portfolio_photographes(aa_photographe);
 
   }//f_js_create_profil_photographes(aa_photographes){
 
@@ -159,6 +145,37 @@ var dataPhotographe = new Array();
     return bioDesc;
   }
 
+  /*********************************************************** 
+ * APPEL LES FONCTIONS DE CREATION DE L ARTICLE PHOTOGRAPHE
+ * *********************************************************/
+   f_js_create_portfolio_photographes(aa_photographe){
+
+    //AJOUT DU PORTFOLIO
+    const portFolio = document.querySelector(".portfolio");
+    
+    //DOM LIGTHBOX
+    const ligthBoxContent = document.querySelector(".ligthbox-content");
+    
+    //BOUCLE SUR LES MEDIAS
+    aa_photographe[1].media.forEach((media,index) =>{
+
+      let typeMedia = media.image ? true : false;
+
+      const newMedia = this.f_js_gen_portfolio(media,index,typeMedia);
+      portFolio.appendChild(newMedia);
+
+      const newMediaLigthBox = this.f_js_gen_mediaLigthBox(media,typeMedia);
+      ligthBoxContent.appendChild(newMediaLigthBox);
+    });
+
+    const caption = document.createElement("p");
+    caption.setAttribute("id", "caption");
+    caption.classList.add("ligthbox-content-imgTitle");
+    ligthBoxContent.appendChild(caption);   
+
+  }//f_js_create_profil_photographes(aa_photographes){
+
+
   /**
    * 
    * @param {objet} ao_media 
@@ -181,10 +198,21 @@ var dataPhotographe = new Array();
       linkPortfolioContent.appendChild(imgPortfolioContent);
       portfolioContent.appendChild(linkPortfolioContent);
     }else{
+
+      let indexPosterAleatoire = dataPhotographe[1].media[ai_index + 1] ? ai_index + 1 : ai_index - 1;
+      
       const videoPortfolioContent= document.createElement("video");
       videoPortfolioContent.classList.add("portfolio-img");
-      videoPortfolioContent.setAttribute("src", "./images/"+ ao_media.photographerId + "/" + ao_media.video);
-      //videoPortfolioContent.setAttribute("autoplay", true); 
+      videoPortfolioContent.setAttribute("id", "player"); 
+      videoPortfolioContent.setAttribute("playsinline", true); 
+      videoPortfolioContent.setAttribute("controls", true); 
+      videoPortfolioContent.setAttribute("poster", "./images/"+ ao_media.photographerId + "/" + dataPhotographe[1].media[indexPosterAleatoire].image);
+
+      const sourceVideoPortfolio= document.createElement("source");
+      sourceVideoPortfolio.setAttribute("src", "./images/"+ ao_media.photographerId + "/" + ao_media.video);
+      sourceVideoPortfolio.setAttribute("type", "video/mp4"); 
+
+      videoPortfolioContent.appendChild(sourceVideoPortfolio);
       portfolioContent.appendChild(videoPortfolioContent);
     }
 
@@ -200,7 +228,7 @@ var dataPhotographe = new Array();
     
     const portfolioLikeImg = document.createElement("span");
     portfolioLikeImg.setAttribute("class", "portfolio-like");
-    portfolioLikeImg.innerText = 12;
+    portfolioLikeImg.innerText = ao_media.likes;
     portfolioDesc.appendChild(portfolioLikeImg);
 
     const iconLikeImg = document.createElement("i");
@@ -241,18 +269,13 @@ var dataPhotographe = new Array();
       //videoPortfolioContent.setAttribute("autoplay", true); 
       linkMediaLigthBox.appendChild(videoLigthBoxContent);
     }
-
-
-    
-
     return linkMediaLigthBox;
   }
   
-
 }
 
 /******************************************
- * INITIALISATION DE LA CLASSE PHOTOGRAPHES
+ * INITIALISATION DE LA CLASSE PHOTOGRAPHE
  ******************************************/
 const classPhotographe = new PHOTOGRAPHE(IDPhotographe);
 
@@ -303,13 +326,13 @@ class Ligthbox {
 }
 
 /******************************************
- * INITIALISATION DE LA CLASSE openLigthbox
+ * INITIALISATION DE LA CLASSE LIGTHBOX
  ******************************************/
 const classLigthbox = new Ligthbox();
   
 
 /******************************************
- * CLASS CONTACT MODAL
+ * CLASS FORMULAIRE
  ******************************************/
 class contactModal {
   constructor(){
@@ -338,45 +361,150 @@ class contactModal {
 }
 
 /******************************************
- * INITIALISATION DE LA CLASSE contactModal
+ * INITIALISATION DE LA CLASSE FORMULAIRE
  ******************************************/
 const classContactModal = new contactModal();
 
 
 
+/******************************************
+ * CLASSE FILTER
+ ******************************************/
+var FILTER = ["ASC","ASC","ASC"];
+
 class triByAttribut{
 
-  portfolioContents = document.querySelectorAll(".portfolio-content");
-  li_nb_portfolioContents = portfolioContents.length;
-  // launch modal form
-  triByDate() {   
-  
-    if(this.li_nb_portfolioContents > 0){
-      this.portfolioContents.forEach((portfolioContent, key) => {
-        console.log(portfolioContent)
-        //articles.removeChild(photographes[key]);
-      });
-      //classPhotographes.f_js_get_json_photographes(as_tag);
-    }else{
-     // classPhotographes.f_js_get_json_photographes();
-    }
-
-    dataPhotographe[1].media.sort(function(a,b){
-      // Turn your strings into dates, and then subtract them
-      // to get a value that is either negative, positive, or zero.
-      return new Date(b.date) - new Date(a.date);
-    });
-
-    
-
+  getDomPortfolioContents(){
+    let portfolioContents = document.querySelectorAll(".portfolio-content");
+    return portfolioContents;
   }
 
+  getDomPortfolioSlides(){
+    let portfolioSlides = document.querySelectorAll(".slides");
+    return portfolioSlides;
+  }
+
+  deleteCaption(){
+    let caption = document.querySelector(".ligthbox-content-imgTitle");
+    caption.remove();
+  }
+
+  /**
+   * SUPPRIME LA GALLERIE
+   * TRI LE TABLEAU PAR POPULARITE
+   * RENVOI UNE GALLERIE TRIEE
+   */
+   triByPopular() {   
+
+    let portfolioContents = this.getDomPortfolioContents();
+    let li_nb_portfolioContents = portfolioContents.length;
+    let portfolioSlides = this.getDomPortfolioSlides();
+
+    if(li_nb_portfolioContents > 0){
+      this.deleteCaption();
+      portfolioContents.forEach((portfolioContent,index) => {
+        portfolioContent.remove();
+        portfolioSlides[index].remove();
+      });
+
+      if(FILTER[0] == "ASC"){
+        FILTER[0] = "DESC";
+        dataPhotographe[1].media.sort(function(a,b){
+          
+            return b.likes - a.likes ;  
+        });
+      }else{
+        FILTER[0] = "ASC";
+        dataPhotographe[1].media.sort(function(a,b){
+            return a.likes - b.likes;
+        });
+      }
+
+      classPhotographe.f_js_create_portfolio_photographes(dataPhotographe);
+      f_js_init_likes();
+    }
+  }
+  
+  /**
+   * SUPPRIME LA GALLERIE
+   * TRI LE TABLEAU PAR DATE
+   * RENVOI UNE GALLERIE TRIEE
+   */
+  triByDate() {   
+
+    let portfolioContents = this.getDomPortfolioContents();
+    let li_nb_portfolioContents = portfolioContents.length;
+    let portfolioSlides = this.getDomPortfolioSlides();
+    if(li_nb_portfolioContents > 0){
+      this.deleteCaption();
+      portfolioContents.forEach((portfolioContent,index) => {
+        portfolioContent.remove();
+        portfolioSlides[index].remove();
+      });
+
+      if(FILTER[1] == "ASC"){
+        FILTER[1] = "DESC";
+        dataPhotographe[1].media.sort(function(a,b){
+            return new Date(b.date) - new Date(a.date);   
+        });
+      }else{
+        FILTER[1] = "ASC";
+        dataPhotographe[1].media.sort(function(a,b){
+            return new Date(a.date) - new Date(b.date);   
+        });
+      }
+
+      classPhotographe.f_js_create_portfolio_photographes(dataPhotographe);
+      f_js_init_likes();
+    }
+  }
+
+ /**
+ * SUPPRIME LA GALLERIE
+ * TRI LE TABLEAU PAR TITRE
+ * RENVOI UNE GALLERIE TRIEE
+ */
+  triByTitle() {   
+
+    let portfolioContents = this.getDomPortfolioContents();
+    let li_nb_portfolioContents = portfolioContents.length;
+    let portfolioSlides = this.getDomPortfolioSlides();
+    if(li_nb_portfolioContents > 0){
+      this.deleteCaption();
+      portfolioContents.forEach((portfolioContent,index) => {
+        portfolioContent.remove();
+        portfolioSlides[index].remove();
+      });
+
+      if(FILTER[2] == "ASC"){
+        FILTER[2] = "DESC";
+        dataPhotographe[1].media.sort(function(a,b){
+          return ('' + b.title).localeCompare(a.title);  
+        });
+      }else{
+        FILTER[2] = "ASC";
+        dataPhotographe[1].media.sort(function(a,b){
+            return ('' + a.title).localeCompare(b.title);  
+        });
+      }
+
+      classPhotographe.f_js_create_portfolio_photographes(dataPhotographe);
+      f_js_init_likes();
+    }
+  }
 
 }
 
-/**
- * RACCOURCI CLAVIE
- */
+/******************************************
+ * INITIALISATION DE LA CLASSE FILTER
+ ******************************************/
+const classTriByAttribut = new triByAttribut();
+
+
+
+/******************************************
+ * RACCOURCI CLAVIER
+ ******************************************/
 document.addEventListener('keydown', keyCodeAccessiblity);
 
 function keyCodeAccessiblity(e) {
@@ -410,9 +538,9 @@ function keyCodeAccessiblity(e) {
 }
 
 
-/**
- * MENU TRIE
- */
+/******************************************
+ * DROPDOWN MENU TRI
+ ******************************************/
 
 $dropdownMenu = document.querySelector('.filter-dropdown-content');
 $dropdownLink = document.querySelector('.filter-dropbtn');
@@ -436,12 +564,17 @@ $dropdownLink.addEventListener('click', function(e) {
 })
 
 
-/**
+/******************************************
  * INITIALISATION EVENT LIKE APRES CREATION DES DOM EN JS
- * INCREMENT LES LIKES PAR IMAGE
+ * INCREMENT LES LIKES PAR IMA
  * INCREMENT LES LIKES TOTAL
- */
+ ******************************************/
 setTimeout(() => {
+  f_js_init_likes();
+}, 3000);
+
+
+function f_js_init_likes(){
   const iconHeart = document.querySelectorAll(".fa-heart");
   const allSpanLikes = document.querySelectorAll(".portfolio-like");
   const spanAllLikes = document.querySelector(".popular-likes");
@@ -456,4 +589,4 @@ setTimeout(() => {
     spanAllLikes.innerText = allLikes.toLocaleString();
     
   }));
-}, 3000);
+}

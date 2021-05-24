@@ -59,6 +59,10 @@ $max_width_tablette : 1024px;
         .filter{
             display: none;
         }
+
+        .popular{
+            display: none;
+        }
         
         /**
         PAGE D'ACCUEIL
@@ -84,6 +88,14 @@ $max_width_tablette : 1024px;
        }
        .portfolio-img {
             height: 700px;
+        }
+
+        .filter{
+            display: none;
+        }
+
+        .popular{
+            display: none;
         }
     }
 }
