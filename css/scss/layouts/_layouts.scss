@@ -1,87 +1,45 @@
 
-
-/*  HEADER */
+/** 
+HEADER
+*/
 .header{
-    background-color: $color_white;
-    text-align: center;
-    box-shadow: 0 0 10px rgb(0,0,0,0.25);
-    height: 50px;
+    margin-top: 1em;
+    width: 100%;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    position: relative;
-    &__logo{
-        font-family: 'Shrikhand', sans-serif;
-        font-size: 25px;
-        margin: 0;
+    &-navigation{
+        ul{
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            list-style: none;
+            padding: 0 ;
+            justify-content: center;
+        }
+        &-item{          
+            padding: 0.2rem .5rem;
+            margin: .2rem .2rem;
+            border: 0.5px solid #C4C4C4;
+            box-sizing: border-box;
+            border-radius: 11px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 500;    
+            
+            a{
+                color: $color_primary_one;
+            }
+            
+        }
     }
 
-    &__icon{
-        position: absolute;
-        top: 15px;
-        left: 15px;
-    }
-
-    &__link{
-        list-style: none;
-        color: $color_black;
-    }
-
-}
-
-
-/*  BUTTON */
-.btn{
-    border: 0;
-    padding: .75rem 1.5rem;
-    font-weight: 600;
-    border-radius: 100px;
-    color: $color_white;
-    background-color: $background_color_btn;
-    cursor: pointer;
-    transition-duration: .25s;
-    box-shadow: 0.25rem 0.25rem 10px rgba(0, 0, 0, 0.25);
-
-    &.btn-degraded{
-        background-image: linear-gradient(
-            0deg
-            ,$color_primary_ligth,$color_secondary_ligth);
-    }
-    
-    &:hover {
-        background-color: $color_white;
-        box-shadow: 0.25rem 0.25rem 10px rgba(0, 0, 0, 0.50);
-    }
-}
-
-/*  FOOTER */
-.footer{
-    background-color: $background_color_footer; 
-    padding: 1rem 0 1rem 0;
-
-    &__logo{
-        font-family: 'Shrikhand', sans-serif;
-        font-size: 18px;
-        color: $color_white;
-        margin: 0;
-    }
-
-    &__nav{
-        list-style: none;
-        padding: 0;
-        color: $color_white;
-    }
-
-    &__link{
-        text-decoration: none;
-        color: $color_white;
-        font-size: 14px;
-    }
-
-    i{
-        margin : 0 0.5rem 0 0;
-        width: 15px;
-        font-size: 12px
+    &-photographesTitle{
+        color: $color_primary_one;
+        font-weight: 400;
+        &:hover, &:focus {
+            font-weight: 700;
+        }
     }
 }
 

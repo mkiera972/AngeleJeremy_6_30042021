@@ -1,14 +1,11 @@
 /* VARIABLE RESPONSIVE*/
-$max_width_mobile: 767px;
 
-$min_width_tablette : 599px;
 $max_width_tablette : 1024px;
 
-$min_width_desktop : 599px;
 
 /*MOBILE*/
 @mixin mobile-only {
-    @media only screen and (max-width: $max_width_mobile){
+    @media only screen and (max-width: $max_width_tablette){
         .header{
             flex-wrap: wrap;
             &-svg{
@@ -26,7 +23,50 @@ $min_width_desktop : 599px;
                 order: 2;
                 font-size: 14px;
             }
+            
+        }//.header{
+
+         /** PAGE DU PHOTOGRAPHE */
+        .bio{
+            position: relative;
+            &-description{
+                text-align: initial;
+            }
+
+            &-btn{
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                margin-top: 100px;
+                margin-left: -60px;
+            }
+
+            &-tags{
+                flex-wrap: wrap;
+            }
+
+
+            &-img{
+                position: absolute;
+                right: 0;
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                object-fit: cover; 
+            }
+        }//.photographe{
+        
+        .filter{
+            display: none;
         }
+
+        .popular{
+            display: none;
+        }
+        
+        /**
+        PAGE D'ACCUEIL
+        */
         .articles{
             .photographe{
                 margin: 1rem 0;
@@ -43,37 +83,19 @@ $min_width_desktop : 599px;
 /*TABLETTE*/
 @mixin tablette-only {
     @media only screen and (min-width: 768px) and (max-width: 1100px){
-        .header{
-            flex-wrap: wrap;
-            &-svg{
-                order: 1;
-                svg{
-                    width: 150px;
-                }
-            }
-
-            &-navigation{
-                order: 3;
-                width: 100%;
-            }
-
-            &-photographesTitle{
-                order: 2;
-                font-size: 14px;
-            }
+       .content{
+            margin: 5% auto;
+       }
+       .portfolio-img {
+            height: 700px;
         }
-        .articles{
-            display: flex;
-            flex-wrap: wrap;
-            .photographe{
-                margin: 1rem 0;
-                width: 50%;
-                &-img{
-                    width: 40%;
-                    height: 180px;
-                }
-        
-            }
+
+        .filter{
+            display: none;
+        }
+
+        .popular{
+            display: none;
         }
     }
 }
@@ -82,8 +104,9 @@ $min_width_desktop : 599px;
 @mixin desktop-plus-only {
     @media only screen and (min-width: 1101px){
         .container{
-            padding: 0 2rem;
+            padding: 0 4rem;
         }
+
         .articles{
             display: flex;
             flex-wrap: wrap;
@@ -98,6 +121,84 @@ $min_width_desktop : 599px;
         
             }
         }
+
+        .bio{
+            margin: 20px 0;
+            justify-content: space-between;
+            background-color: $background_color_bio;
+            border-radius: 5px;
+            &-description{
+                padding: 2rem;
+                text-align: initial;
+            }
+
+            &-btn{
+                margin-left: 4rem;
+                padding: 1rem;
+            }
+
+            &-portrait{
+                padding: 2rem;
+            }
+
+            &-img{
+                margin: 2.5rem;
+                width: 150px;
+                height: 150px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+        }//.photographe{
+
+        .popular{
+            width: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            background-color: $color_background_btn_one;
+            color: $color_black;
+            position: fixed;
+            border-radius: 5px;
+            bottom: 0;
+            right: 20px;
+            i{
+                position: relative;
+                left: -10px;
+            }
+        }
+
+        .portfolio{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+
+            &-content{
+                width: 28%;
+            }
+
+            &-img{
+                height: 280px;
+            }
+        }
+
+        .ligthbox{
+            padding-top: 10px;
+            &-content {
+                width: 40%;
+            }
+            .slides{
+                width: 100%;
+                &-img{
+                    width: 85%;
+                    height: 500px;
+                    
+                }
+            }
+        }
+
+
+        
+
     }    
 }
 

@@ -54,7 +54,7 @@ class PHOTOGRAPHES {
 
     const newLinkPortrait = document.createElement("a");
     newLinkPortrait.classList.add("photographe-portrait");
-    newLinkPortrait.setAttribute("href", "#");
+    newLinkPortrait.setAttribute("href","profilPhotographe.html?ID=" + ao_photographe.id);
     
     const imgPortrait = document.createElement("img");
     imgPortrait.classList.add("photographe-img");
@@ -195,7 +195,6 @@ function goToMain(){
     photographes.forEach((photographe, key) => {
       articles.removeChild(photographes[key]);
     });
-
     classPhotographes.f_js_get_json_photographes(as_tag);
   }else{
     classPhotographes.f_js_get_json_photographes();
