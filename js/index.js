@@ -1,7 +1,7 @@
 /*****************************
- * CETTE CLASSE PHOTOGRAPHES
- * RECUPERE LES DONNEES
- * CREER LES PHOTOGRAPHES
+ * CLASSE PHOTOGRAPHES
+ * RECUPERE LES DONNEES EN JSON
+ * CREER LES PROFIL DES PHOTOGRAPHES
  ****************************/
 class PHOTOGRAPHES {
   constructor() {
@@ -11,7 +11,7 @@ class PHOTOGRAPHES {
   /****************************************
    * 
    * @param {*} as_filter_tags 
-   * RECUPERE LES DONNEES DES PHOTOGRAPHES
+   * RECUPERE LES DONNEES JSON
    ****************************************/
    f_js_get_json_photographes(as_filter_tags = ''){
     const ls_url_data_photographes = "json/FishEyeData.json";
@@ -140,13 +140,19 @@ class PHOTOGRAPHES {
 
         newArticle.appendChild(newLinkPortrait);
 
+
+
         const newDivDesc = this.f_js_gen_desc_photographe(lo_photographe);
 
         newArticle.appendChild(newDivDesc);
 
+
+
         const newDivTags = this.f_js_gen_tags_photographe(lo_photographe);
         
         newArticle.appendChild(newDivTags);
+
+
 
         //AJOUT DE L'ARTICLE
         const articles = document.querySelector(".articles");
@@ -181,6 +187,9 @@ function displayLinkToMain() {
   }
 }
 
+/**
+ * DIRIGE UTILISATEUR VERS LE CONTENU
+ */
 function goToMain(){
   window.scrollTo({ top: 150, behavior: 'smooth' })
 }

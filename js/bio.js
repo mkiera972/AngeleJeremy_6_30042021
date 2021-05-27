@@ -11,6 +11,7 @@ const IDPhotographe = urlParams.get('ID') ? urlParams.get('ID') : 243;
  ******************************************/
 var allLikes = 297081;
 const spanAllLikes = document.querySelector(".popular-likes");
+
 /**************************************************************
  * TABLEAU GLOBAL CONTENANT LES DONNEES DU PHOTOGRAPHE EN COURS
  **************************************************************/
@@ -19,7 +20,7 @@ var dataPhotographe = new Array();
 
 
 /*****************************
- * CETTE CLASSE PHOTOGRAPHES
+ * CLASSE PHOTOGRAPHES
  * RECUPERE LES DONNEES DU PHOTOGRAPHES
  * CREER LE PROFIL ET PORTFOLIO DU PHOTOGRAPHE
  ****************************/
@@ -182,7 +183,7 @@ var dataPhotographe = new Array();
 
 
   /**
-   * 
+   * GENERE LA GALLERIE DU PHOTOGRAPHE
    * @param {objet} ao_media 
    * @param {1} ai_index 
    * @returns DOM
@@ -267,8 +268,9 @@ var dataPhotographe = new Array();
   }
 
 
-  /**
- * 
+ /**
+ * GENERE LA LIGTHBOX CONTENANT 
+ * LA GALLERIE DU PHOTOGRAPHE
  * @param {objet} ao_media 
  * @param {1} ai_index 
  * @returns DOM
@@ -321,10 +323,11 @@ const classPhotographe = new PHOTOGRAPHE(IDPhotographe);
 
 /**
  * DOM BIO
+ * INIT DES DOM APRES CREATION DES DOM PAR LE JS
  */
 setTimeout(() => {
   const bioBtn = document.querySelector(".bio-btn");
-  const portFolioImg = document.querySelectorAll(".portfolio-img");
+  const portFolioImg = document.querySelectorAll(".portfolio-link");
     
   /** ADDEVENTLISTER BIO */
   bioBtn.addEventListener('click', () => {
@@ -342,6 +345,10 @@ setTimeout(() => {
 
 /******************************************
  * CLASS LIGTHBOX
+ * OUVRE LA LIGTHBOX
+ * FERME LA LIGTHBOX
+ * PASSE AU SUIVANT
+ * PASSE AU PRECEDENT
  ******************************************/
 class Ligthbox {
   constructor(width, height){
@@ -414,6 +421,8 @@ next.addEventListener('click', () => {
 
 /******************************************
  * CLASS FORMULAIRE
+ * OUVRE LE FORMULAIRE
+ * FERME LE FORMULAIRE
  ******************************************/
 class contactModal {
   constructor(){
@@ -471,7 +480,7 @@ closeModal.addEventListener('click', () => {
 });
 
 /**
- * 
+ * VERIFIE QUE LES CHAMPS DU FORMULAIRE SOIT CONFORMENT
  * @param {DOM INPUT} ao_input 
  * @param {NUMBER} ai_index 
  */
@@ -539,6 +548,7 @@ function f_js_check_saisie(ao_input, ai_index){
 
 /******************************************
  * CLASSE FILTER
+ * FILTRE LA GALLERIE
  ******************************************/
 var FILTER = ["ASC","ASC","ASC"];
 

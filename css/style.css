@@ -27,6 +27,7 @@ a {
   text-decoration: none;
 }
 
+/** CSS PAGE ACCUEIL */
 .linkToMain {
   margin: 0.5rem auto;
   background-color: #DB8876;
@@ -43,8 +44,10 @@ a {
   padding: 0.2rem;
   transition-duration: 0.5s;
 }
-.linkToMain:focus {
+.linkToMain:focus, .linkToMain:hover {
   transform: scale(1.1);
+  background-color: #901C1C;
+  color: #ffffff;
 }
 
 /** 
@@ -94,7 +97,8 @@ ARTICLES
   padding: 0;
   justify-content: center;
 }
-.photographe-tags-item {
+.photographe-tags-item a {
+  color: #901C1C;
   padding: 0.2rem 0.5rem;
   margin: 0.2rem 0.2rem;
   border: 0.5px solid #C4C4C4;
@@ -104,18 +108,46 @@ ARTICLES
   font-size: 12px;
   font-weight: 500;
 }
-.photographe-tags-item a {
-  transition-duration: 0.2s;
-  color: #901C1C;
-}
 .photographe-tags-item a:focus, .photographe-tags-item a:hover {
   font-weight: bold;
   font-size: 20px;
+  background-color: #901C1C;
+  color: #ffffff;
+  border: 0.5px solid #901C1C;
 }
 
-/** 
-BIOGRAPHIE
-*/
+/*RESPONSIVE*/
+@media only screen and (max-width: 1024px) {
+  .articles .photographe {
+    margin: 1rem 0;
+  }
+  .articles .photographe-img {
+    height: 180px;
+  }
+}
+/*DESKTOP ET PLUS*/
+@media only screen and (min-width: 1101px) {
+  .container {
+    padding: 0 4rem;
+  }
+
+  .articles {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .articles .photographe {
+    margin: 1rem 0;
+    width: 29%;
+  }
+  .articles .photographe-img {
+    width: 50%;
+    height: 180px;
+  }
+}
+/**************************
+* SECTION BIOGRAPHIE
+*************************/
 .bio {
   width: 100%;
   display: flex;
@@ -159,7 +191,7 @@ BIOGRAPHIE
   list-style: none;
   padding: 0;
 }
-.bio-tags-item {
+.bio-tags-item a {
   padding: 0.2rem 0.5rem;
   margin: 0.2rem 0.2rem;
   border: 0.5px solid #C4C4C4;
@@ -168,19 +200,20 @@ BIOGRAPHIE
   text-align: center;
   font-size: 12px;
   font-weight: 500;
-}
-.bio-tags-item a {
   color: #901C1C;
   transition-duration: 0.2s;
 }
 .bio-tags-item a:focus, .bio-tags-item a:hover {
   font-weight: bold;
+  background-color: #901C1C;
+  color: #ffffff;
   font-size: 20px;
+  border: 0.5px solid #901C1C;
 }
 
-/**
+/**************************
 * SECTION FILTRE
-*/
+**************************/
 .filter {
   display: flex;
   align-items: flex-start;
@@ -200,6 +233,11 @@ BIOGRAPHIE
   border: none;
   cursor: pointer;
   border-radius: 5px;
+}
+.filter-dropbtn:focus, .filter-dropbtn:hover, .filter-dropbtn:active {
+  background: #D3573C;
+  color: #000000;
+  font-weight: bold;
 }
 .filter-dropdown {
   position: relative;
@@ -229,22 +267,31 @@ BIOGRAPHIE
   width: 80%;
   border-top: 1px solid #ffffff;
 }
-.filter-dropdown-content a:hover {
+.filter-dropdown-content a:focus, .filter-dropdown-content a:hover, .filter-dropdown-content a:active {
+  background: #D3573C;
+  color: #000000;
+  font-weight: bold;
+}
+.filter-dropdown:hover, .filter-dropdown:focus, .filter-dropdown:active {
   background-color: #D3573C;
 }
-.filter-dropdown:hover {
-  background-color: #D3573C;
-}
-.filter-dropdown:hover svg {
+.filter-dropdown:hover svg, .filter-dropdown:focus svg, .filter-dropdown:active svg {
   animation: rotation 0.5s linear;
   animation-fill-mode: both;
 }
+.filter-dropdown:hover svg path, .filter-dropdown:focus svg path, .filter-dropdown:active svg path {
+  stroke: #000000;
+}
 
+/* KEYFRAME SVG ANGLE */
 @keyframes rotation {
   100% {
     transform: rotate(180deg);
   }
 }
+/**************************
+* BUTTON
+**************************/
 .btn {
   padding: 0.2rem 1rem;
   font-weight: 700;
@@ -267,17 +314,26 @@ BIOGRAPHIE
   background-color: #901C1C;
   border: 1px solid #901C1C;
   color: #ffffff;
+  transition: 0.2s;
+}
+.btn.default:focus, .btn.default:hover, .btn.default:active {
+  border: 1px solid #D3573C;
+  background: #D3573C;
+  color: #000000;
+  font-weight: bold;
+  transform: scale(1.1);
 }
 
+/**************************
+* SECTION PORTFOLIO
+**************************/
 .portfolio-content {
   margin-bottom: 20px;
 }
-.portfolio-link {
-  transition-duration: 0.2s;
-}
-.portfolio-link:focus, .portfolio-link:hover {
+.portfolio-link:focus, .portfolio-link:hover, .portfolio-link:active {
   display: block;
-  transform: scale(1.04);
+  border: 2px solid #D3573C;
+  color: #D3573C;
 }
 .portfolio-img {
   width: 100%;
@@ -308,7 +364,9 @@ BIOGRAPHIE
   cursor: pointer;
 }
 
-/* The ligthbox (background) */
+/**************************
+* The ligthbox
+**************************/
 .ligthbox {
   display: none;
   position: fixed;
@@ -393,30 +451,9 @@ BIOGRAPHIE
   border-radius: 3px 0 0 3px;
 }
 
-/**** test **/
-.modal-btn {
-  font-size: 145%;
-  background: #fe142f;
-  display: flex;
-  margin: auto;
-  padding: 2em;
-  color: #fff;
-  padding: 0.75rem 2.5rem;
-  border-radius: 1rem;
-  cursor: pointer;
-}
-
-.modal-btn:hover {
-  background: #3876ac;
-}
-
-.footer {
-  margin: 20px;
-  padding: 10px;
-  font-family: var(--font-slab);
-}
-
-/* Modal form */
+/**************************
+* Modal form 
+**************************/
 .bgroundModal {
   display: none;
   position: fixed;
@@ -570,79 +607,10 @@ input, textarea {
     opacity: 1;
   }
 }
-/** 
-HEADER
-*/
-.header {
-  margin-top: 1em;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.header-svg {
-  transition-duration: 0.2s;
-}
-.header-svg:focus, .header-svg:hover {
-  transform: scale(1.15);
-}
-.header-navigation ul {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  list-style: none;
-  padding: 0;
-  justify-content: center;
-}
-.header-navigation-item {
-  padding: 0.2rem 0.5rem;
-  margin: 0.2rem 0.2rem;
-  border: 0.5px solid #C4C4C4;
-  box-sizing: border-box;
-  border-radius: 11px;
-  text-align: center;
-  font-size: 12px;
-  font-weight: 500;
-}
-.header-navigation-item a {
-  transition-duration: 0.2s;
-  color: #901C1C;
-}
-.header-navigation-item a:focus, .header-navigation-item a:hover {
-  font-weight: bold;
-  font-size: 20px;
-}
-.header-photographesTitle {
-  color: #901C1C;
-  font-weight: 400;
-}
-.header-photographesTitle:hover, .header-photographesTitle:focus {
-  font-weight: 700;
-}
-
-/* VARIABLE RESPONSIVE*/
-/*MOBILE*/
-/*TABLETTE*/
-/*DESKTOP ET PLUS*/
+/**************************
+* RESPONSIVE
+**************************/
 @media only screen and (max-width: 1024px) {
-  .header {
-    flex-wrap: wrap;
-  }
-  .header-svg {
-    order: 1;
-  }
-  .header-svg svg {
-    width: 150px;
-  }
-  .header-navigation {
-    order: 3;
-  }
-  .header-photographesTitle {
-    order: 2;
-    font-size: 14px;
-  }
-
-  /** PAGE DU PHOTOGRAPHE */
   .bio {
     position: relative;
   }
@@ -675,53 +643,9 @@ HEADER
   .popular {
     display: none;
   }
-
-  /**
-  PAGE D'ACCUEIL
-  */
-  .articles .photographe {
-    margin: 1rem 0;
-  }
-  .articles .photographe-img {
-    height: 180px;
-  }
 }
-@media only screen and (min-width: 768px) and (max-width: 1100px) {
-  .content {
-    margin: 5% auto;
-  }
-
-  .portfolio-img {
-    height: 700px;
-  }
-
-  .filter {
-    display: none;
-  }
-
-  .popular {
-    display: none;
-  }
-}
+/*DESKTOP ET PLUS*/
 @media only screen and (min-width: 1101px) {
-  .container {
-    padding: 0 4rem;
-  }
-
-  .articles {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-  .articles .photographe {
-    margin: 1rem 0;
-    width: 29%;
-  }
-  .articles .photographe-img {
-    width: 50%;
-    height: 180px;
-  }
-
   .bio {
     margin: 20px 0;
     justify-content: space-between;
@@ -770,7 +694,7 @@ HEADER
     justify-content: space-between;
   }
   .portfolio-content {
-    width: 28%;
+    width: 30%;
   }
   .portfolio-img {
     height: 400px;
@@ -788,6 +712,97 @@ HEADER
   .ligthbox .slides-img {
     width: 85%;
     height: 500px;
+  }
+}
+/** CSS HEADER / FOOTER */
+/** 
+HEADER
+*/
+.header {
+  margin-top: 1em;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header-svg {
+  transition-duration: 0.2s;
+}
+.header-svg:focus, .header-svg:hover {
+  transform: scale(1.15);
+}
+.header-navigation ul {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  justify-content: center;
+}
+.header-navigation-item a {
+  padding: 0.2rem 0.5rem;
+  margin: 0.2rem 0.2rem;
+  border: 0.5px solid #C4C4C4;
+  box-sizing: border-box;
+  border-radius: 11px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 2rem;
+  color: #901C1C;
+}
+.header-navigation-item a:focus, .header-navigation-item a:hover {
+  font-weight: bold;
+  font-size: 20px;
+  background-color: #901C1C;
+  color: #ffffff;
+  border: 0.5px solid #901C1C;
+}
+.header-photographesTitle {
+  color: #901C1C;
+  font-weight: 400;
+}
+.header-photographesTitle:hover, .header-photographesTitle:focus {
+  font-weight: 700;
+}
+
+/** 
+* RESPONSIVE
+*/
+@media only screen and (max-width: 1024px) {
+  .header {
+    flex-wrap: wrap;
+  }
+  .header-svg {
+    order: 1;
+  }
+  .header-svg svg {
+    width: 150px;
+  }
+  .header-navigation {
+    order: 3;
+    width: 100%;
+  }
+  .header-photographesTitle {
+    order: 2;
+    font-size: 14px;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 1100px) {
+  .content {
+    margin: 5% auto;
+  }
+
+  .portfolio-img {
+    height: 700px;
+  }
+
+  .filter {
+    display: none;
+  }
+
+  .popular {
+    display: none;
   }
 }
 

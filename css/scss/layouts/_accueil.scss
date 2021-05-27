@@ -1,3 +1,5 @@
+/** CSS PAGE ACCUEIL */
+
 .linkToMain{
     margin: 0.5rem auto;
     background-color: $color_background_btn_one;
@@ -14,8 +16,10 @@
     padding: 0.2rem;
     transition-duration: 0.5s;
 
-    &:focus{
-        transform: scale(1.1)
+    &:focus,&:hover{
+        transform: scale(1.1);
+        background-color : $color_primary_one;
+        color: $color_white;
     }
     
 }
@@ -79,25 +83,68 @@ ARTICLES
         }
 
         &-item{
-            padding: 0.2rem .5rem;
-            margin: .2rem .2rem;
-            border: 0.5px solid #C4C4C4;
-            box-sizing: border-box;
-            border-radius: 11px;
-            text-align: center;
-            font-size: 12px;
-            font-weight: 500;
-
             a{
-                transition-duration: 0.2s;
                 color: $color_primary_one;
+                padding: 0.2rem .5rem;
+                margin: .2rem .2rem;
+                border: 0.5px solid #C4C4C4;
+                box-sizing: border-box;
+                border-radius: 11px;
+                text-align: center;
+                font-size: 12px;
+                font-weight: 500;
                 &:focus,&:hover{
                     font-weight: bold;
                     font-size: 20px;
+                    background-color: $color_primary_one;
+                    color: $color_white;
+                    border: 0.5px solid $color_primary_one;
                 }
             }
         }
         
     }
 }
+
+
+/*RESPONSIVE*/
+
+@media only screen and (max-width: 1024px){
+    .articles{
+        .photographe{
+            margin: 1rem 0;
+
+            &-img{
+                height: 180px;
+            }
+
+        }
+    }
+}
+
+/*DESKTOP ET PLUS*/
+
+@media only screen and (min-width: 1101px){
+    .container{
+        padding: 0 4rem;
+    }
+
+    .articles{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        .photographe{
+            margin: 1rem 0;
+            width: 29%;
+            &-img{
+                width: 50%;
+                height: 180px;
+            }
+    
+        }
+    }
+
+}    
+
+
 
