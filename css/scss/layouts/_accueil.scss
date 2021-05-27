@@ -12,6 +12,11 @@
     display: none;
     width: 180px;
     padding: 0.2rem;
+    transition-duration: 0.5s;
+
+    &:focus{
+        transform: scale(1.1)
+    }
     
 }
 
@@ -22,12 +27,17 @@ ARTICLES
     &-portrait{
         display: block;
         text-align: center;
+        transition-duration: 0.2s;
+        &:focus,&:hover{
+            transform: scale(1.15);
+        }
     }
 
     &-img{
         width: 50%;
         border-radius: 50%;
         object-fit: cover;
+
     }
 
     &-name{
@@ -79,7 +89,12 @@ ARTICLES
             font-weight: 500;
 
             a{
+                transition-duration: 0.2s;
                 color: $color_primary_one;
+                &:focus,&:hover{
+                    font-weight: bold;
+                    font-size: 20px;
+                }
             }
         }
         

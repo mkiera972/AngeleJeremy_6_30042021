@@ -107,8 +107,8 @@ class PHOTOGRAPHES {
   f_js_gen_tags_photographe(ao_photographe){
     const newDivTags = document.createElement("div");
     newDivTags.classList.add("photographe-tags");
-    newDivTags.setAttribute("role", "tags");
-    newDivTags.setAttribute("aria-label", "Étiquette du photographe");
+    newDivTags.setAttribute("role", "dialog");
+    newDivTags.setAttribute("aria-label", "Liste des étiquettes du photographes " + ao_photographe.name);
 
     const ulTags = document.createElement("ul");
     ao_photographe.tags.forEach(ls_tag => {
@@ -164,9 +164,12 @@ const classPhotographes = new PHOTOGRAPHES();
 
 
 
-// DOM Elements
+/**
+ * DOM BUTTON PASSER AU CONTENU
+ */
 var linkToMain = document.getElementById("linkToMain");
 linkToMain.addEventListener("click", goToMain);
+
 /**
  * AFFICHAGE DU BOUTON PASSER AU MENU SI UTILISATEUR SCROLL VERS LE BAS
  */
@@ -200,6 +203,18 @@ function goToMain(){
     classPhotographes.f_js_get_json_photographes();
   }
 }
+
+/**
+ * DOM TAGS
+ */
+var filterTags = document.querySelectorAll(".header-navigation-item > a");
+
+/**
+ * ADDEVENT SUR LES TAGS
+ */
+filterTags.forEach((tags,index) => tags.addEventListener('click', () => {
+  f_js_filter_tags(tags.innerText.replace("#",""));
+}));
 
 
 

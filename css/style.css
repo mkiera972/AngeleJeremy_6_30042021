@@ -41,6 +41,10 @@ a {
   display: none;
   width: 180px;
   padding: 0.2rem;
+  transition-duration: 0.5s;
+}
+.linkToMain:focus {
+  transform: scale(1.1);
 }
 
 /** 
@@ -49,6 +53,10 @@ ARTICLES
 .photographe-portrait {
   display: block;
   text-align: center;
+  transition-duration: 0.2s;
+}
+.photographe-portrait:focus, .photographe-portrait:hover {
+  transform: scale(1.15);
 }
 .photographe-img {
   width: 50%;
@@ -97,7 +105,12 @@ ARTICLES
   font-weight: 500;
 }
 .photographe-tags-item a {
+  transition-duration: 0.2s;
   color: #901C1C;
+}
+.photographe-tags-item a:focus, .photographe-tags-item a:hover {
+  font-weight: bold;
+  font-size: 20px;
 }
 
 /** 
@@ -158,8 +171,16 @@ BIOGRAPHIE
 }
 .bio-tags-item a {
   color: #901C1C;
+  transition-duration: 0.2s;
+}
+.bio-tags-item a:focus, .bio-tags-item a:hover {
+  font-weight: bold;
+  font-size: 20px;
 }
 
+/**
+* SECTION FILTRE
+*/
 .filter {
   display: flex;
   align-items: flex-start;
@@ -251,6 +272,13 @@ BIOGRAPHIE
 .portfolio-content {
   margin-bottom: 20px;
 }
+.portfolio-link {
+  transition-duration: 0.2s;
+}
+.portfolio-link:focus, .portfolio-link:hover {
+  display: block;
+  transform: scale(1.04);
+}
 .portfolio-img {
   width: 100%;
   border-radius: 2%;
@@ -272,7 +300,11 @@ BIOGRAPHIE
   margin: 0;
   color: #901C1C;
 }
-.portfolio i:hover {
+.portfolio-icon {
+  color: #901C1C;
+}
+.portfolio-icon:focus, .portfolio-icon:hover {
+  color: #D3573C;
   cursor: pointer;
 }
 
@@ -301,7 +333,7 @@ BIOGRAPHIE
 }
 .ligthbox-content-imgTitle {
   color: #901C1C;
-  margin: 0 2.5rem;
+  margin: 0 2.8rem;
 }
 
 /* The Close Button */
@@ -475,6 +507,7 @@ input, textarea {
   padding: 0;
   width: 100%;
   border-radius: 8px;
+  font-size: 14px;
 }
 
 .formSubmit {
@@ -486,6 +519,36 @@ input, textarea {
 .text-label {
   font-weight: normal;
   font-size: 16px;
+}
+
+.formData {
+  margin-bottom: 1rem;
+}
+
+.formData[data-error]::after {
+  content: attr(data-error);
+  font-size: 1em;
+  font-weight: bold;
+  color: #000000;
+  display: block;
+  margin-top: 7px;
+  margin-bottom: 7px;
+  text-align: left;
+  line-height: 0.3;
+  opacity: 0;
+  transition: 0.3s;
+}
+
+.formData[data-error-visible=true]::after {
+  opacity: 1;
+}
+
+.formData[data-error-visible=true] .text-control {
+  border: 3px solid #000000;
+}
+
+.formData[data-error-visible=true] .textarea-control {
+  border: 3px solid #000000;
 }
 
 @media screen and (max-width: 768px) {
@@ -517,6 +580,12 @@ HEADER
   justify-content: space-between;
   align-items: center;
 }
+.header-svg {
+  transition-duration: 0.2s;
+}
+.header-svg:focus, .header-svg:hover {
+  transform: scale(1.15);
+}
 .header-navigation ul {
   display: flex;
   align-items: center;
@@ -536,7 +605,12 @@ HEADER
   font-weight: 500;
 }
 .header-navigation-item a {
+  transition-duration: 0.2s;
   color: #901C1C;
+}
+.header-navigation-item a:focus, .header-navigation-item a:hover {
+  font-weight: bold;
+  font-size: 20px;
 }
 .header-photographesTitle {
   color: #901C1C;
@@ -699,7 +773,7 @@ HEADER
     width: 28%;
   }
   .portfolio-img {
-    height: 280px;
+    height: 400px;
   }
 
   .ligthbox {

@@ -8,6 +8,14 @@ HEADER
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    &-svg{
+        transition-duration: 0.2s;
+        &:focus,&:hover{
+            transform: scale(1.15);
+        }
+    }
+    
     &-navigation{
         ul{
             display: flex;
@@ -25,10 +33,15 @@ HEADER
             border-radius: 11px;
             text-align: center;
             font-size: 12px;
-            font-weight: 500;    
-            
+            font-weight: 500;
+
             a{
+                transition-duration: 0.2s;
                 color: $color_primary_one;
+                &:focus,&:hover{
+                    font-weight: bold;
+                    font-size: 20px;
+                }
             }
             
         }

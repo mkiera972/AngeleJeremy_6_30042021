@@ -65,14 +65,20 @@ BIOGRAPHIE
 
             a{
                 color: $color_primary_one;
+                transition-duration: 0.2s;
+                &:focus,&:hover{
+                  font-weight: bold;
+                  font-size: 20px;
+                }
             }
         }
         
     }
 }
 
-
-
+/**
+* SECTION FILTRE
+*/
 
 .filter{
   display: flex;
@@ -176,6 +182,14 @@ BIOGRAPHIE
         margin-bottom: 20px;
     }
 
+    &-link{
+      transition-duration: 0.2s;
+      &:focus,&:hover{
+          display: block;
+          transform: scale(1.04);
+      }
+    }
+
     &-img{
         width: 100%;
         border-radius: 2%;
@@ -201,11 +215,14 @@ BIOGRAPHIE
         color: $color_primary_one;
     }
 
-    i{
-      &:hover{
+    &-icon{
+      color: $color_primary_one;
+      &:focus,&:hover{
+        color: $color_primary_two;
         cursor: pointer;
       }
     }
+
 }
 
 
@@ -232,9 +249,8 @@ BIOGRAPHIE
     width: 100%;
     max-width: 1330px;
     &-imgTitle{
-        color: $color_primary_one;
-        
-        margin: 0 2.5rem;    
+        color: $color_primary_one;       
+        margin: 0 2.8rem;    
     }
   }
   
@@ -412,6 +428,7 @@ BIOGRAPHIE
     padding: 0;
     width: 100%;
     border-radius: 8px;
+    font-size: 14px;
   }
 
   .formSubmit{
@@ -423,6 +440,34 @@ BIOGRAPHIE
   .text-label {
     font-weight: normal;
     font-size: 16px;
+  }
+
+  .formData{
+    margin-bottom: 1rem;
+  }
+
+  .formData[data-error]::after {
+    content: attr(data-error);
+    font-size: 1em;
+    font-weight: bold;
+    color: $color_black;
+    display: block;
+    margin-top: 7px;
+    margin-bottom: 7px;
+    text-align: left;
+    line-height: 0.3;
+    opacity: 0;
+    transition: 0.3s;
+  }
+  .formData[data-error-visible="true"]::after {
+    opacity: 1;
+  }
+  .formData[data-error-visible="true"] .text-control {
+    border: 3px solid $color_black;
+  }
+
+  .formData[data-error-visible="true"] .textarea-control {
+    border: 3px solid $color_black;
   }
  
   

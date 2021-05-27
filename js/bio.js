@@ -4,14 +4,13 @@
  ******************************************/
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
-const IDPhotographe = urlParams.get('ID');
+const IDPhotographe = urlParams.get('ID') ? urlParams.get('ID') : 243;
 
 /******************************************
  * INITIALISATION DU TOTAL DE LIKES
  ******************************************/
 var allLikes = 297081;
-
-
+const spanAllLikes = document.querySelector(".popular-likes");
 /**************************************************************
  * TABLEAU GLOBAL CONTENANT LES DONNEES DU PHOTOGRAPHE EN COURS
  **************************************************************/
@@ -34,7 +33,7 @@ var dataPhotographe = new Array();
    * @param {*} as_filter_tags 
    * RECUPERE LES DONNEES DES PHOTOGRAPHES
    ****************************************/
-   f_js_get_json_photographes(IDPhotographe = 250){
+   f_js_get_json_photographes(IDPhotographe){
     const ls_url_data_photographes = "json/FishEyeData.json";
     fetch(ls_url_data_photographes)
     .then(res => res.json())
@@ -77,6 +76,9 @@ var dataPhotographe = new Array();
     imgPortrait.setAttribute("alt", "Portrait du photographe " + aa_photographe[0].profil[0].name);
     bio.appendChild(imgPortrait);
 
+    const titleFormModal = document.querySelector(".headerModal-titleFormModal");
+    titleFormModal.innerText = "Contactez-moi " + aa_photographe[0].profil[0].name;
+
     this.f_js_create_portfolio_photographes(aa_photographe);
 
   }//f_js_create_profil_photographes(aa_photographes){
@@ -89,7 +91,8 @@ var dataPhotographe = new Array();
    * @returns 
    *****************************************/
    f_js_gen_desc_bio(ao_photographe){
-  
+    
+    
     const bioDesc = document.createElement("div");
     bioDesc.classList.add("bio-description");
 
@@ -103,7 +106,7 @@ var dataPhotographe = new Array();
 
     const buttonContact = document.createElement("BUTTON");
     buttonContact.setAttribute("class", "btn default bio-btn");
-    buttonContact.setAttribute("onclick", "classContactModal.launchModal();");
+    buttonContact.setAttribute("aria-label", "Ouvrir le formulaire pour contacter le photographe " + ao_photographe.name);
     buttonContact.innerText = "Contactez-moi";
     namePhotographe.appendChild(buttonContact);
     bioInfo.appendChild(namePhotographe);
@@ -164,7 +167,7 @@ var dataPhotographe = new Array();
       const newMedia = this.f_js_gen_portfolio(media,index,typeMedia);
       portFolio.appendChild(newMedia);
 
-      const newMediaLigthBox = this.f_js_gen_mediaLigthBox(media,typeMedia);
+      const newMediaLigthBox = this.f_js_gen_mediaLigthBox(media,index,typeMedia);
       ligthBoxContent.appendChild(newMediaLigthBox);
     });
 
@@ -173,6 +176,8 @@ var dataPhotographe = new Array();
     caption.classList.add("ligthbox-content-imgTitle");
     ligthBoxContent.appendChild(caption);   
 
+    //INITIALISATION DES LIKES TOTAL
+    spanAllLikes.innerText = allLikes.toLocaleString();
   }//f_js_create_profil_photographes(aa_photographes){
 
 
@@ -183,19 +188,23 @@ var dataPhotographe = new Array();
    * @returns DOM
    */
   f_js_gen_portfolio(ao_media,ai_index,as_typeMedia){
+
     const portfolioContent = document.createElement("div");
     portfolioContent.classList.add("portfolio-content");
   
     if(as_typeMedia){
+
       const linkPortfolioContent = document.createElement("a");
-      linkPortfolioContent.setAttribute("href", "#");
-      linkPortfolioContent.setAttribute("onclick", "classLigthbox.openLigthbox();classLigthbox.currentSlide(" + ai_index + ")");
-  
+      linkPortfolioContent.classList.add("portfolio-link");
+      linkPortfolioContent.setAttribute("href", "javascript:void(0);");
+      linkPortfolioContent.setAttribute("aria-label", "Cliquer ou appuyer sur entrée pour afficher la gallerie.");
+      
       const imgPortfolioContent = document.createElement("img");
       imgPortfolioContent.classList.add("portfolio-img");
       imgPortfolioContent.setAttribute("src", "./images/"+ ao_media.photographerId + "/" + ao_media.image);
-  
+      imgPortfolioContent.setAttribute('alt',ao_media.title);
       linkPortfolioContent.appendChild(imgPortfolioContent);
+
       portfolioContent.appendChild(linkPortfolioContent);
     }else{
 
@@ -207,12 +216,20 @@ var dataPhotographe = new Array();
       videoPortfolioContent.setAttribute("playsinline", true); 
       videoPortfolioContent.setAttribute("controls", true); 
       videoPortfolioContent.setAttribute("poster", "./images/"+ ao_media.photographerId + "/" + dataPhotographe[1].media[indexPosterAleatoire].image);
+      videoPortfolioContent.setAttribute("alt", ao_media.title);
 
       const sourceVideoPortfolio= document.createElement("source");
       sourceVideoPortfolio.setAttribute("src", "./images/"+ ao_media.photographerId + "/" + ao_media.video);
       sourceVideoPortfolio.setAttribute("type", "video/mp4"); 
 
+      const trackVideoPortfolio= document.createElement("track");
+      trackVideoPortfolio.setAttribute("src", "./images/"+ ao_media.photographerId + "/" + ao_media.photographerId + ".fr.vtt");
+      trackVideoPortfolio.setAttribute("kind", "subtitles"); 
+      trackVideoPortfolio.setAttribute("srclang", "fr"); 
+      trackVideoPortfolio.setAttribute("label", "Français"); 
+
       videoPortfolioContent.appendChild(sourceVideoPortfolio);
+      videoPortfolioContent.appendChild(trackVideoPortfolio);
       portfolioContent.appendChild(videoPortfolioContent);
     }
 
@@ -229,14 +246,22 @@ var dataPhotographe = new Array();
     const portfolioLikeImg = document.createElement("span");
     portfolioLikeImg.setAttribute("class", "portfolio-like");
     portfolioLikeImg.innerText = ao_media.likes;
+    allLikes += ao_media.likes;
+
     portfolioDesc.appendChild(portfolioLikeImg);
 
     const iconLikeImg = document.createElement("i");
-    iconLikeImg.setAttribute("class", "far fa-heart fas");
+    iconLikeImg.setAttribute("class", "far fa-heart fas portfolio-icon");
+    iconLikeImg.setAttribute("aria-label", "Appuyer ou cliquer sur l'icone pour mettre un j'aime à la photo.");
+    //iconLikeImg.setAttribute("href", "javascript:void(0);");
 
     portfolioDesc.appendChild(iconLikeImg);
     
     portfolioContent.appendChild(portfolioDesc);
+
+    //AJOUT DU PRIX JOURNALIER
+    const pricePhotographe = document.querySelector('.popular-price');
+    pricePhotographe.innerText = ao_media.price + "€ / jour";
 
     return portfolioContent;
   }
@@ -248,7 +273,7 @@ var dataPhotographe = new Array();
  * @param {1} ai_index 
  * @returns DOM
  */
-  f_js_gen_mediaLigthBox(ao_media,as_typeMedia){
+  f_js_gen_mediaLigthBox(ao_media,ai_index,as_typeMedia){
 
     const linkMediaLigthBox = document.createElement("a");
     linkMediaLigthBox.classList.add("slides");
@@ -258,15 +283,30 @@ var dataPhotographe = new Array();
       const imgLigthBoxContent = document.createElement("img");
       imgLigthBoxContent.classList.add("slides-img");
       imgLigthBoxContent.setAttribute("alt", ao_media.title);
-      imgLigthBoxContent.setAttribute("id", "tata");
       imgLigthBoxContent.setAttribute("src", "./images/"+ ao_media.photographerId + "/" + ao_media.image);
       linkMediaLigthBox.appendChild(imgLigthBoxContent);
     }else{
+      let indexPosterAleatoire = dataPhotographe[1].media[ai_index + 1] ? ai_index + 1 : ai_index - 1;
       const videoLigthBoxContent= document.createElement("video");
       videoLigthBoxContent.classList.add("slides-img");
       videoLigthBoxContent.setAttribute("alt", ao_media.title);
-      videoLigthBoxContent.setAttribute("src", "./images/"+ ao_media.photographerId + "/" + ao_media.video);
-      //videoPortfolioContent.setAttribute("autoplay", true); 
+      videoLigthBoxContent.setAttribute("playsinline", true); 
+      videoLigthBoxContent.setAttribute("controls", true); 
+      videoLigthBoxContent.setAttribute("poster", "./images/"+ ao_media.photographerId + "/" + dataPhotographe[1].media[indexPosterAleatoire].image);
+
+      const sourceVideoLigthBox= document.createElement("source");
+      sourceVideoLigthBox.setAttribute("src", "./images/"+ ao_media.photographerId + "/" + ao_media.video);
+      sourceVideoLigthBox.setAttribute("type", "video/mp4"); 
+
+      const trackLigthBox= document.createElement("track");
+      trackLigthBox.setAttribute("src", "./images/"+ ao_media.photographerId + "/" + ao_media.photographerId + ".fr.vtt");
+      trackLigthBox.setAttribute("kind", "subtitles"); 
+      trackLigthBox.setAttribute("srclang", "fr"); 
+      trackLigthBox.setAttribute("label", "Français"); 
+ 
+      videoLigthBoxContent.appendChild(sourceVideoLigthBox);
+      videoLigthBoxContent.appendChild(trackLigthBox);
+
       linkMediaLigthBox.appendChild(videoLigthBoxContent);
     }
     return linkMediaLigthBox;
@@ -279,6 +319,25 @@ var dataPhotographe = new Array();
  ******************************************/
 const classPhotographe = new PHOTOGRAPHE(IDPhotographe);
 
+/**
+ * DOM BIO
+ */
+setTimeout(() => {
+  const bioBtn = document.querySelector(".bio-btn");
+  const portFolioImg = document.querySelectorAll(".portfolio-img");
+    
+  /** ADDEVENTLISTER BIO */
+  bioBtn.addEventListener('click', () => {
+    classContactModal.launchModal();
+  });
+
+  portFolioImg.forEach((img,index) => img.addEventListener('click', () => {
+    classLigthbox.openLigthbox();
+    classLigthbox.currentSlide(index);
+  }));
+}, 3000);
+//imgPortfolioContent.setAttribute("onclick", "classLigthbox.openLigthbox();classLigthbox.currentSlide(" + ai_index + ")");
+
 
 
 /******************************************
@@ -286,7 +345,7 @@ const classPhotographe = new PHOTOGRAPHE(IDPhotographe);
  ******************************************/
 class Ligthbox {
   constructor(width, height){
-    this.slideIndex = 1;
+    this.slideIndex = 0;
     this.ligthbox = document.getElementById("ligthbox");
     this.closeModalLigthbox = document.getElementById("closeLigthbox");
   }
@@ -313,14 +372,14 @@ class Ligthbox {
     const slides = document.getElementsByClassName("slides");
     const captionText = document.getElementById("caption");
     
-    if (n > slides.length) {this.slideIndex = 1}
-    if (n < 1) {this.slideIndex = slides.length}
+    if (n >= slides.length) {this.slideIndex = 0}
+    if (n < 0) {this.slideIndex = slides.length -1}
     for (i = 0; i < slides.length; i++) {
         slides[i].style.display = "none";
     }
-    slides[this.slideIndex-1].style.display = "block";
-    console.log(slides[this.slideIndex-1].lastElementChild.alt)
-    captionText.innerHTML = slides[this.slideIndex-1].lastElementChild.alt;
+    slides[this.slideIndex].style.display = "block";
+    //captionText.innerHTML = slides[this.slideIndex-1].lastElementChild.alt;
+    captionText.innerHTML = slides[this.slideIndex].children[0].attributes.alt.nodeValue;
   }
 
 }
@@ -329,6 +388,28 @@ class Ligthbox {
  * INITIALISATION DE LA CLASSE LIGTHBOX
  ******************************************/
 const classLigthbox = new Ligthbox();
+
+/**
+ * DOM LIGTHBOX
+ */
+ const closeLigthbox = document.querySelector(".closeLigthbox");
+ const prev = document.querySelector(".prev");
+ const next = document.querySelector(".next");
+ 
+ 
+ /** ADDEVENTLISTER LIGTHBOX */
+ 
+ closeLigthbox.addEventListener('click', () => {
+    classLigthbox.closeLigthbox()
+ });
+
+ prev.addEventListener('click', () => {
+  classLigthbox.plusSlides(-1);
+});
+
+next.addEventListener('click', () => {
+  classLigthbox.plusSlides(1);
+});
   
 
 /******************************************
@@ -366,6 +447,95 @@ class contactModal {
 const classContactModal = new contactModal();
 
 
+/**
+ * DOM MODAL FORMULAIRE
+ */
+const blockForm = document.getElementsByTagName("form")[0];
+const formData = document.querySelectorAll(".formData");
+const inputFormData = document.querySelectorAll(".text-control");
+const textareaFormData = document.querySelector(".textarea-control");
+const closeModal = document.querySelector(".closeModal");
+
+
+/** ADDEVENTLISTER MODAL FORMULAIRE */
+inputFormData.forEach((input,index) => input.addEventListener('change', () => {
+  f_js_check_saisie(input,index);
+}));
+
+textareaFormData.addEventListener('change', () => {
+  f_js_check_saisie(textareaFormData,formData.length-1)
+});
+
+closeModal.addEventListener('click', () => {
+  classContactModal.closeModal();
+});
+
+/**
+ * 
+ * @param {DOM INPUT} ao_input 
+ * @param {NUMBER} ai_index 
+ */
+function f_js_check_saisie(ao_input, ai_index){
+  /*console.log(ai_index);
+  return false;*/
+  switch (ao_input.id) {
+    case "first":
+    case "last":
+        if((ao_input.value.length < 2)){
+          formData[ai_index].setAttribute("data-error-visible","true");
+          formData[ai_index].setAttribute("data-error","Veuillez saisir un minimum de deux caractères.");
+        }else{
+          formData[ai_index].setAttribute("data-error-visible","false");
+        }  
+    break;
+    
+    case "email":
+      if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(ao_input.value))
+      {
+        formData[ai_index].setAttribute("data-error-visible","false");
+        statutForm = true;
+      }else{
+        formData[ai_index].setAttribute("data-error-visible","true");
+        formData[ai_index].setAttribute("data-error","Veuillez saisir un email valide.");e;
+      }
+    break;
+  
+    default:
+        if((ao_input.value == '')){
+          formData[ai_index].setAttribute("data-error-visible","true");
+          formData[ai_index].setAttribute("data-error","Veuillez saisir un message.");
+        }else{
+          formData[ai_index].setAttribute("data-error-visible","false");
+        }
+    break;
+  }
+
+}//function f_js_check_saisie(ao_input, ai_index){
+
+
+/**
+ * VALIDATION DU FORMULAIRE
+ * @returns 
+ */
+ function f_js_validate(){
+  
+  /* Controle du statut du formulaire */
+  
+  let statutForm = true;
+
+  //RESET DU FORMULAIRE SI VALIDATION OK
+  for (var i = 0; i < blockForm.length; i++) {
+      if(blockForm[i].type == "submit"){continue;}
+      if(blockForm[i].value.trim() == ""){statutForm = false;}
+      console.log(blockForm[i].id," = ",blockForm[i].value)
+  }
+
+  if(!statutForm){return false;}
+  
+  blockForm.reset();
+  return false;
+}
+
 
 /******************************************
  * CLASSE FILTER
@@ -389,11 +559,11 @@ class triByAttribut{
     caption.remove();
   }
 
-  /**
+  /********************************************
    * SUPPRIME LA GALLERIE
    * TRI LE TABLEAU PAR POPULARITE
    * RENVOI UNE GALLERIE TRIEE
-   */
+   *******************************************/
    triByPopular() {   
 
     let portfolioContents = this.getDomPortfolioContents();
@@ -425,11 +595,11 @@ class triByAttribut{
     }
   }
   
-  /**
+  /********************************************
    * SUPPRIME LA GALLERIE
    * TRI LE TABLEAU PAR DATE
    * RENVOI UNE GALLERIE TRIEE
-   */
+   *******************************************/
   triByDate() {   
 
     let portfolioContents = this.getDomPortfolioContents();
@@ -459,11 +629,11 @@ class triByAttribut{
     }
   }
 
- /**
+ /********************************************
  * SUPPRIME LA GALLERIE
  * TRI LE TABLEAU PAR TITRE
  * RENVOI UNE GALLERIE TRIEE
- */
+ *******************************************/
   triByTitle() {   
 
     let portfolioContents = this.getDomPortfolioContents();
@@ -500,6 +670,26 @@ class triByAttribut{
  ******************************************/
 const classTriByAttribut = new triByAttribut();
 
+/**
+ * DOM TRI
+ */
+const triByPopular = document.getElementById("triByPopular");
+const triByDate = document.getElementById("triByDate");
+const triBytitle = document.getElementById("triBytitle");
+
+
+triByPopular.addEventListener('click', () => {
+classTriByAttribut.triByPopular();
+});
+
+triByDate.addEventListener('click', () => {
+  classTriByAttribut.triByDate();
+});
+
+triBytitle.addEventListener('click', () => {
+  classTriByAttribut.triByTitle();
+});
+
 
 
 /******************************************
@@ -514,9 +704,10 @@ function keyCodeAccessiblity(e) {
     classContactModal.launchModal();
   }
 
-  //OUVRE LA MODAL AVEC CTRL + ALT + C
-  if (e.ctrlKey && e.altKey && e.keyCode === 67) {
-    classContactModal.closeModal();
+  //OUVRE LA LIGTHBOX AVEC CTRL + ALT + L
+  if (e.ctrlKey && e.altKey && e.keyCode === 76) {
+    classLigthbox.openLigthbox();
+    classLigthbox.currentSlide(1);
   }
 
   //IMAGE SUIVANTE DANS SLIDE
@@ -577,7 +768,7 @@ setTimeout(() => {
 function f_js_init_likes(){
   const iconHeart = document.querySelectorAll(".fa-heart");
   const allSpanLikes = document.querySelectorAll(".portfolio-like");
-  const spanAllLikes = document.querySelector(".popular-likes");
+
 
   iconHeart.forEach((icon,index) => icon.addEventListener('click', () => {
 
@@ -586,7 +777,7 @@ function f_js_init_likes(){
     allLikes += 1;
 
     //INCREMENTATION DU SPAN CONTENANT TOTAL LIKE
-    spanAllLikes.innerText = allLikes.toLocaleString();
+    spanAllLikes.innerText = allLikes.toLocaleString();    
     
   }));
 }

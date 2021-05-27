@@ -13,7 +13,7 @@
 <!-- EN-TETE -->
 <div class="container">
     <header class="header" role="banner">
-        <a href="#" class="header-svg" aria-label="Logo de fisheye">
+        <a href="/" class="header-svg" aria-label="Logo de fisheye">
             <svg role="img" alt="Logo de fisheye" width="200" height="50" viewBox="0 0 200 50" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M24.7206 0.911621V6.51058H6.31164V17.5783H21.4333V22.9168H6.31164V39.1929H0V0.911621H24.7206Z" fill="#911C1C"/>
                 <path d="M34.5826 1.04167C35.2401 1.69271 35.6346 2.60417 35.6346 3.64583C35.6346 4.6875 35.2401 5.46875 34.5826 6.11979C33.9252 6.77083 33.0047 7.16146 31.9528 7.16146C30.9008 7.16146 30.1119 6.77083 29.3229 6.11979C28.6655 5.46875 28.271 4.55729 28.271 3.64583C28.271 2.60417 28.6655 1.82292 29.3229 1.04167C29.9804 0.390625 30.9008 0 31.9528 0C33.0047 0 33.7937 0.390625 34.5826 1.04167ZM34.8456 11.1979V39.1927H28.9285V11.1979H34.8456Z" fill="#911C1C"/>
@@ -32,22 +32,22 @@
 <!-- CONTENU PRINCIPALE -->
 <main class="main"  id="#main" role="main">
     <div class="container">
-        <div class="popular">
-            <span class="popular-likes">297 081</span>
+        <div class="popular" id="popular" role="dialog">
+            <p class="popular-likes"></p>
             <i class="far fa-heart fas"></i>
-            <p class="popular-price">300€ / jour</p>
+            <p class="popular-price"></p>
         </div>
         <div class="filter">
             <label class="filter-label">Tier par </label>
-            <div class="filter-dropdown">
-                <button class="filter-dropbtn" onclick="classTriByAttribut.triByPopular()" aria-haspopup="true" aria-expanded="false">Popularité
+            <div class="filter-dropdown" role="menu">
+                <button aria-label="Filtrer sur la popularité" class="filter-dropbtn" id="triByPopular" aria-haspopup="true" aria-expanded="false">Popularité
                     <svg role="icon" alt="Afficher le menu de tri" width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1 1.33447L8.00465 8.13311L14.5973 1.33447" stroke="#E9E9E9" stroke-width="2"/>
                     </svg>                  
                 </button>
                 <div class="filter-dropdown-content">
-                    <a href="javascript:void(0);" onclick="classTriByAttribut.triByDate()">Date</a>
-                    <a href="javascript:void(0);" onclick="classTriByAttribut.triByTitle()">Titre</a>
+                    <a aria-label="Filtrer sur la date" href="javascript:void(0);" id="triByDate">Date</a>
+                    <a aria-label="Filtrer sur le titre" href="javascript:void(0);" id="triBytitle">Titre</a>
                 </div>
             </div>
         </div>
@@ -58,17 +58,17 @@
         <div id="ligthbox" class="ligthbox">
            
             <div class="ligthbox-content" aria-label="Diapositive des images du photographe">
-              <a href="#" aria-label="Fermer la modal" id="closeLigthbox" class="closeLigthbox cursor" onclick="classLigthbox.closeLigthbox()">&times;</a>
-              <a class="prev" aria-label="Photo précedente" href="#" onclick="classLigthbox.plusSlides(-1)">&#10094;</a>
-              <a class="next" aria-label="Photo suivante" href="#" onclick="classLigthbox.plusSlides(1)">&#10095;</a>
+              <a href="javascript:void(0);" aria-label="Fermer la gallerie d'image" id="closeLigthbox" class="closeLigthbox cursor">&times;</a>
+              <a class="prev" aria-label="Photo précedente" href="javascript:void(0);">&#10094;</a>
+              <a class="next" aria-label="Photo suivante" href="javascript:void(0);">&#10095;</a>
             </div>
         </div>
 <!-- MODAL -->        
         <div class="bgroundModal">
             <div class="content" role="dialog" id="dialog1_label" aria-labelledby="Contactez-moi Mimi keel" aria-modal="true">
                 <div class="headerModal">
-                    <h1 class="headerModal-titleFormModal" id="dialog1_label">Contactez-moi Mimi Keel</h1>
-                    <a href="#" id="closeModal" class="closeModal" onclick="classContactModal.closeModal();" ></a>
+                    <h1 class="headerModal-titleFormModal" id="dialog1_label"></h1>
+                    <a href="javascript:void(0);" aria-label="Filtrer la modal du formulaire" id="closeModal" class="closeModal"></a>
                 </div>
                 <div class="modal-body">
                     <form
@@ -76,7 +76,7 @@
                         name="reserve"
                         action="index.html"
                         method="get"
-                        onsubmit="return validate();"
+                        onsubmit="return f_js_validate();"
                     >
                         <div
                             class="formData">
@@ -124,8 +124,7 @@
                                 name="message"
                                 aria-labelledby="Votre message"
                                 required
-                            >
-                            </textarea>
+                            ></textarea>
                         </div>
                         <div class="formSubmit">
                             <button class="btn default" type="submit" aria-labelledby="Envoyer">Envoyer</button>
