@@ -55,11 +55,11 @@ class PHOTOGRAPHES {
     const newLinkPortrait = document.createElement("a");
     newLinkPortrait.classList.add("photographe-portrait");
     newLinkPortrait.setAttribute("href","profilPhotographe.html?ID=" + ao_photographe.id);
-    
+
     const imgPortrait = document.createElement("img");
     imgPortrait.classList.add("photographe-img");
     imgPortrait.setAttribute("src", ls_src_img_portrait);
-    imgPortrait.setAttribute("alt", "Portrait du photographe " + ao_photographe.name);
+    imgPortrait.setAttribute("alt", "Portrait du photographe " + ao_photographe.name + ", cliquer sur la photo pour consulter son profil");
 
     const namePhotographe = document.createElement("h2");
     namePhotographe.classList.add("photographe-name");
@@ -191,7 +191,8 @@ function displayLinkToMain() {
  * DIRIGE UTILISATEUR VERS LE CONTENU
  */
 function goToMain(){
-  window.scrollTo({ top: 150, behavior: 'smooth' })
+  window.scrollTo({ top: 150, behavior: 'smooth' });
+  document.querySelectorAll('.photographe-portrait')[0].focus();
 }
 
 /***************************
