@@ -364,6 +364,11 @@ ARTICLES
   color: #D3573C;
   cursor: pointer;
 }
+.portfolio-iconPopular {
+  width: 20px;
+  position: relative;
+  right: 15px;
+}
 
 /**************************
 * The ligthbox

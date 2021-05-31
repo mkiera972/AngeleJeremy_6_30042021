@@ -254,7 +254,7 @@ var dataPhotographe = new Array();
     const iconLikeImg = document.createElement("img");
     iconLikeImg.setAttribute("class", "portfolio-icon");
     iconLikeImg.setAttribute("alt", "Appuyer ou cliquer sur l'icone pour mettre un j'aime à la photo.");
-    iconLikeImg.setAttribute("src", "./images/icons_heart.png");
+    iconLikeImg.setAttribute("src", "./images/icon/icons_heart.png");
 
     //iconLikeImg.setAttribute("href", "javascript:void(0);");
 
