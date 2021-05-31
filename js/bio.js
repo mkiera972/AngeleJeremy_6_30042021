@@ -251,9 +251,11 @@ var dataPhotographe = new Array();
 
     portfolioDesc.appendChild(portfolioLikeImg);
 
-    const iconLikeImg = document.createElement("i");
-    iconLikeImg.setAttribute("class", "far fa-heart fas portfolio-icon");
-    iconLikeImg.setAttribute("aria-label", "Appuyer ou cliquer sur l'icone pour mettre un j'aime à la photo.");
+    const iconLikeImg = document.createElement("img");
+    iconLikeImg.setAttribute("class", "portfolio-icon");
+    iconLikeImg.setAttribute("alt", "Appuyer ou cliquer sur l'icone pour mettre un j'aime à la photo.");
+    iconLikeImg.setAttribute("src", "./images/icons_heart.png");
+
     //iconLikeImg.setAttribute("href", "javascript:void(0);");
 
     portfolioDesc.appendChild(iconLikeImg);
@@ -776,14 +778,13 @@ setTimeout(() => {
 
 
 function f_js_init_likes(){
-  const iconHeart = document.querySelectorAll(".fa-heart");
+  const iconHeart = document.querySelectorAll(".portfolio-icon");
   const allSpanLikes = document.querySelectorAll(".portfolio-like");
-
+  
 
   iconHeart.forEach((icon,index) => icon.addEventListener('click', () => {
-
     //INCREMENTATION DES SPAN INDIVIDUELLEMENT
-    allSpanLikes[index-1].innerText=parseInt(allSpanLikes[index-1].innerText) + 1 ;
+    allSpanLikes[index].innerText=parseInt(allSpanLikes[index].innerText) + 1 ;
     allLikes += 1;
 
     //INCREMENTATION DU SPAN CONTENANT TOTAL LIKE

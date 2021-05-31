@@ -358,6 +358,7 @@ ARTICLES
 }
 .portfolio-icon {
   color: #901C1C;
+  width: 20px;
 }
 .portfolio-icon:focus, .portfolio-icon:hover {
   color: #D3573C;

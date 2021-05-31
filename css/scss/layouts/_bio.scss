@@ -249,6 +249,7 @@
 
     &-icon{
       color: $color_primary_one;
+      width: 20px;
       &:focus,&:hover{
         color: $color_primary_two;
         cursor: pointer;
