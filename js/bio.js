@@ -505,7 +505,7 @@ function f_js_check_saisie(ao_input, ai_index){
         statutForm = true;
       }else{
         formData[ai_index].setAttribute("data-error-visible","true");
-        formData[ai_index].setAttribute("data-error","Veuillez saisir un email valide.");e;
+        formData[ai_index].setAttribute("data-error","Veuillez saisir un email valide.");
       }
     break;
   

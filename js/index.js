@@ -40,7 +40,6 @@ class PHOTOGRAPHES {
       //CREATION DES ARTICLES PAR PHOTOGRAPHES
       const newArticle = document.createElement("article");
       newArticle.classList.add("photographe"); 
-      newArticle.setAttribute("role", "article");
       return newArticle;
   }
 
