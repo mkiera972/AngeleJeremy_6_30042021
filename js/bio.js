@@ -126,8 +126,8 @@ var dataPhotographe = new Array();
     //DOM TAGS
     const bioTags = document.createElement("div");
     bioTags.classList.add("bio-tags");
-    bioTags.setAttribute("role", "tags");
-    bioTags.setAttribute("aria-label", "Étiquette du photographe");
+    bioTags.setAttribute("role", "dialog");
+    bioTags.setAttribute("aria-label", "Liste des étiquettes du photographes " + ao_photographe.name);
 
     const ulTags = document.createElement("ul");
     ao_photographe.tags.forEach(ls_tag => {
@@ -136,7 +136,7 @@ var dataPhotographe = new Array();
         liTags.classList.add("bio-tags-item");
 
         const linkTags = document.createElement("a");
-        linkTags.setAttribute("href", "#");
+        linkTags.setAttribute("href", "javascript:void(0);");
         linkTags.innerText = "#" + ls_tag ;
 
         liTags.appendChild(linkTags);
@@ -490,7 +490,7 @@ function f_js_check_saisie(ao_input, ai_index){
   switch (ao_input.id) {
     case "first":
     case "last":
-        if((ao_input.value.length < 2)){
+        if((ao_input.value.trim().length < 2)){
           formData[ai_index].setAttribute("data-error-visible","true");
           formData[ai_index].setAttribute("data-error","Veuillez saisir un minimum de deux caractères.");
         }else{

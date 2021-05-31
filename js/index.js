@@ -118,6 +118,7 @@ class PHOTOGRAPHES {
 
         const linkTags = document.createElement("a");
         linkTags.setAttribute("href", "#");
+        linkTags.setAttribute("href", "javascript:void(0);");
         linkTags.innerText = "#" + ls_tag ;
 
         liTags.appendChild(linkTags);
