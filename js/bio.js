@@ -53,7 +53,7 @@ var dataPhotographe = new Array();
         this.f_js_create_profil_photographes(dataPhotographe);
     })
     .catch(function(err) {
-      // Une erreur est survenue
+      console.log(err)
     });
   }
 
@@ -179,6 +179,8 @@ var dataPhotographe = new Array();
 
     //INITIALISATION DES LIKES TOTAL
     spanAllLikes.innerText = allLikes.toLocaleString();
+    f_js_init_likes();
+    f_js_init_ligthboxEvent();
   }//f_js_create_profil_photographes(aa_photographes){
 
 
@@ -327,7 +329,7 @@ const classPhotographe = new PHOTOGRAPHE(IDPhotographe);
  * DOM BIO
  * INIT DES DOM APRES CREATION DES DOM PAR LE JS
  */
-setTimeout(() => {
+function f_js_init_ligthboxEvent(){
   const bioBtn = document.querySelector(".bio-btn");
   const portFolioImg = document.querySelectorAll(".portfolio-link");
     
@@ -337,10 +339,13 @@ setTimeout(() => {
   });
 
   portFolioImg.forEach((img,index) => img.addEventListener('click', () => {
+    console.log(index)
     classLigthbox.openLigthbox();
     classLigthbox.currentSlide(index);
   }));
-}, 3000);
+}
+
+
 //imgPortfolioContent.setAttribute("onclick", "classLigthbox.openLigthbox();classLigthbox.currentSlide(" + ai_index + ")");
 
 
@@ -353,7 +358,7 @@ setTimeout(() => {
  * PASSE AU PRECEDENT
  ******************************************/
 class Ligthbox {
-  constructor(width, height){
+  constructor(){
     this.slideIndex = 0;
     this.ligthbox = document.getElementById("ligthbox");
     this.closeModalLigthbox = document.getElementById("closeLigthbox");
@@ -504,7 +509,6 @@ function f_js_check_saisie(ao_input, ai_index){
       if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(ao_input.value))
       {
         formData[ai_index].setAttribute("data-error-visible","false");
-        statutForm = true;
       }else{
         formData[ai_index].setAttribute("data-error-visible","true");
         formData[ai_index].setAttribute("data-error","Veuillez saisir un email valide.");
@@ -523,6 +527,12 @@ function f_js_check_saisie(ao_input, ai_index){
 
 }//function f_js_check_saisie(ao_input, ai_index){
 
+  
+  const form = document.querySelector('form')
+  form.addEventListener('submit', event => {
+    f_js_validate();
+    event.preventDefault();
+  })
 
 /**
  * VALIDATION DU FORMULAIRE
@@ -603,7 +613,6 @@ class triByAttribut{
       }
 
       classPhotographe.f_js_create_portfolio_photographes(dataPhotographe);
-      f_js_init_likes();
     }
   }
   
@@ -637,7 +646,6 @@ class triByAttribut{
       }
 
       classPhotographe.f_js_create_portfolio_photographes(dataPhotographe);
-      f_js_init_likes();
     }
   }
 
@@ -671,7 +679,6 @@ class triByAttribut{
       }
 
       classPhotographe.f_js_create_portfolio_photographes(dataPhotographe);
-      f_js_init_likes();
     }
   }
 
@@ -745,23 +752,21 @@ function keyCodeAccessiblity(e) {
  * DROPDOWN MENU TRI
  ******************************************/
 
-$dropdownMenu = document.querySelector('.filter-dropdown-content');
-$dropdownLink = document.querySelector('.filter-dropbtn');
-
-
+var dropdownMenu = document.querySelector('.filter-dropdown-content');
+var dropdownLink = document.querySelector('.filter-dropbtn');
 function toggleNavbar() {
-    if (!$dropdownMenu.getAttribute('style') || $dropdownMenu.getAttribute('style') === 'display: none;') {
-        $dropdownMenu.style.display = 'block';
-        $dropdownLink.setAttribute('aria-expanded', 'true');
-        $dropdownLink.setAttribute('style', 'border-radius:0');
+    if (!dropdownMenu.getAttribute('style') || dropdownMenu.getAttribute('style') === 'display: none;') {
+        dropdownMenu.style.display = 'block';
+        dropdownLink.setAttribute('aria-expanded', 'true');
+        dropdownLink.setAttribute('style', 'border-radius:0');
     } else {
-        $dropdownMenu.style.display = 'none';
-        $dropdownLink.setAttribute('aria-expanded', 'false');
-        $dropdownLink.setAttribute('style', 'border-radius:5px');
+        dropdownMenu.style.display = 'none';
+        dropdownLink.setAttribute('aria-expanded', 'false');
+        dropdownLink.setAttribute('style', 'border-radius:5px');
     }
 }
 
-$dropdownLink.addEventListener('click', function(e) {
+dropdownLink.addEventListener('click', function(e) {
     e.preventDefault();
     toggleNavbar();
 })
@@ -772,11 +777,6 @@ $dropdownLink.addEventListener('click', function(e) {
  * INCREMENT LES LIKES PAR IMA
  * INCREMENT LES LIKES TOTAL
  ******************************************/
-setTimeout(() => {
-  f_js_init_likes();
-}, 3000);
-
-
 function f_js_init_likes(){
   const iconHeart = document.querySelectorAll(".portfolio-icon");
   const allSpanLikes = document.querySelectorAll(".portfolio-like");

@@ -3,6 +3,7 @@
  * RECUPERE LES DONNEES EN JSON
  * CREER LES PROFIL DES PHOTOGRAPHES
  ****************************/
+const articles = document.querySelector(".articles");
 class PHOTOGRAPHES {
   constructor() {
     this.f_js_get_json_photographes();
@@ -28,7 +29,7 @@ class PHOTOGRAPHES {
         this.f_js_create_article_photographes(la_photographes);
     })
     .catch(function(err) {
-      // Une erreur est survenue
+      console.log(err);
     });
   }
 
@@ -140,22 +141,13 @@ class PHOTOGRAPHES {
 
         newArticle.appendChild(newLinkPortrait);
 
-
-
         const newDivDesc = this.f_js_gen_desc_photographe(lo_photographe);
-
         newArticle.appendChild(newDivDesc);
-
-
 
         const newDivTags = this.f_js_gen_tags_photographe(lo_photographe);
         
         newArticle.appendChild(newDivTags);
 
-
-
-        //AJOUT DE L'ARTICLE
-        const articles = document.querySelector(".articles");
         articles.appendChild(newArticle);
     });
   }//f_js_create_article_photographes(aa_photographes){
@@ -167,8 +159,6 @@ class PHOTOGRAPHES {
  * INITIALISATION DE LA CLASSE PHOTOGRAPHES
  ******************************************/
 const classPhotographes = new PHOTOGRAPHES();
-
-
 
 /**
  * DOM BUTTON PASSER AU CONTENU
@@ -222,7 +212,7 @@ var filterTags = document.querySelectorAll(".header-navigation-item > a");
 /**
  * ADDEVENT SUR LES TAGS
  */
-filterTags.forEach((tags,index) => tags.addEventListener('click', () => {
+filterTags.forEach(tags => tags.addEventListener('click', () => {
   f_js_filter_tags(tags.innerText.replace("#",""));
 }));
 
